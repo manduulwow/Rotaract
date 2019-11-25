@@ -1,0 +1,152 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.MainMenu{
+  text-align: center;
+}
+
+.MainMenu li{
+  display: inline-block;
+  padding: 24px 10px;
+  font-family: 'open-sans-bold', AvenirNext-Medium, sans-serif;
+  color: #757575;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.Settings-Buttons{
+  left: calc(100% - 300px);
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  width: 250px;
+}
+
+.Settings-Buttons li{
+  display: inline-block;
+  padding: 0px 10px;
+  font-family: 'open-sans-bold', AvenirNext-Medium, sans-serif;
+  color: #757575;
+  text-transform: uppercase
+}
+
+.Logo{
+  display: inline-block;
+}
+
+.Login-form{
+  display: block;
+  margin: auto;
+  position: relative;
+  width: 500px;
+}
+
+.Login-form input{
+  width: 100%;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 3px #ddd;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.card{
+  display: inline-block;
+}
+
+.cardContainer{
+  margin: auto;
+  width: 690px;
+}
+
+.MuiTableCell-alignRight{
+  text-align: center !important;
+}
+
+.chipSelected{
+  color: #fff !important;
+  background-color: #d31a58 !important;
+}
+
+.Box-Container{
+  margin-top: 150px;
+}
+
+.MuiChip-clickable{
+  width: 150px !important;
+}
+
+.MainImageField{
+  border: solid 1px;
+  height: 500px;
+}
+
+a{
+  color: purple;
+}
+.about-img{
+  width: 100%;
+  height: 100%;
+}
+.about-paper{
+  max-width: 40% !important;
+}
+.club-paper{
+  width: 30%;
+  display: inline-block;
+  margin: 20px;
+  text-align: center;
+}
+.uploadTypeCard{
+  width: 345px;
+}
+.project-card{
+  width: 70%;
+  margin: auto;
+  margin-bottom: 100px;
+}
+.charterDate{
+  margin-bottom: 40px;
+}
+.MuiTypography-gutterBottom{
+  margin-bottom: 10px !important;
+}
+.club-info-text{
+  margin-bottom: 300px;
+}
+.fileContainer{
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.fileUploader{
+  height: 100%;
+}
+.uploadBtn{
+  position: absolute !important;
+}
+textarea{
+  width: 100%;
+}
