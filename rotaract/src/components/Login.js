@@ -33,7 +33,7 @@ const Login = (props) => {
     return (
         <div className="Login-form">
             <form onSubmit={onSubmit} className="Login">
-                <h1>Login Below! haha {props.isLogged}</h1>
+                <h1>Login Below!{props.isLogged}</h1>
                 <input
                 type="text"
                 name="username"

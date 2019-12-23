@@ -16,7 +16,6 @@ const withAuth = function(req, res, next) {
     } else {
         const token_check = token.split("=")[0]
         const club_id = token.split("=")[1]
-        console.log("club id : "+ club_id)
         jwt.verify(token_check, secret, function(err, decoded) {
             if(err) {
                 res.status(401).send('Unauthorized: Invalid token')

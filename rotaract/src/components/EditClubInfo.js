@@ -105,8 +105,6 @@ const ClubEditPage = (props) => {
                 if(res.status === 200) {
                     setImageFile(picture[0])
                     setIsUploaded(true)
-                    console.log("Image File")
-                    console.log(isUploaded)
                 }
             })
             .catch(error => {
@@ -116,7 +114,6 @@ const ClubEditPage = (props) => {
         else { console.log("Must Upload Image") }
     }
 
-    console.log(typeof props.location.state.image)
     return (
         <div>
             <Container fixed>

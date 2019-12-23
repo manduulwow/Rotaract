@@ -49,30 +49,40 @@ module.exports = {
         const clubName = data.body.clubName
         const clubIntroduction = data.body.clubIntroduction
         const fileNames = data.body.fileNames
-        console.log("Edit club working")
-        let imagePath = './tmp/tmp_images'
+        let imagePath = './img/tmp_images'
         let desPath = './img/club-info-img'
         fs.readdir(imagePath, function (err, files) {
-            files.forEach(function (file, index) {
-                if (fileNames.includes(file)) {
-                    fs.rename(path.join(imagePath, file), path.join(desPath, file), err => {
-                        if (err) throw err;
-                        console.log('Moving ' + file);
-                        db.query('INSERT INTO images SET ?', { path: path.join(desPath, file) }, function (err, result) {
+            if(fileNames.length > 0) {
+                files.forEach(function (file, index) {
+                    if (fileNames.includes(file)) {
+                        fs.rename(path.join(imagePath, file), path.join(desPath, file), err => {
                             if (err) throw err;
-                            let query = "UPDATE `club` SET name=?,introduction=?,charterDate=?,club_page_img_id=? WHERE id=?";
-                            db.query(query, [clubName,clubIntroduction, charterDate, result.insertId, clubId], (err, response) => {
-                                if (err) {
-                                    console.log(err)
-                                    return res.status(500).send(err);
-                                }
-                                return res.status(200).json('Updated Introduction');
-                            })
-                            console.log(result.insertId);
+                            db.query('INSERT INTO images SET ?', { path: path.join(desPath, file) }, function (err, result) {
+                                if (err) throw err;
+                                let query = "UPDATE `club` SET name=?,introduction=?,charterDate=?,club_page_img_id=? WHERE id=?";
+                                db.query(query, [clubName,clubIntroduction, charterDate, result.insertId, clubId], (err, response) => {
+                                    if (err) {
+                                        console.log(err)
+                                        return res.status(500).send(err);
+                                    }
+                                    return res.status(200).json('Updated Introduction');
+                                })
+                            });
                         });
-                    });
-                }
-            })
+                    }
+                })
+            }
+            else {
+                let query = "UPDATE `club` SET name=?,introduction=?,charterDate=? WHERE id=?";
+                db.query(query, [clubName,clubIntroduction, charterDate, clubId], (err, response) => {
+                    if (err) {
+                        console.log(err)
+                        return res.status(500).send(err);
+                    }
+                    return res.status(200).json('Updated Introduction');
+                })
+            }
+                
 
             if (err) {
                 console.log(err)

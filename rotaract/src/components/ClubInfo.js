@@ -40,7 +40,7 @@ const ClubInformation = (props) => {
     const name = (clubData[0]) ? clubData[0].name : "Not given"
     const introduction = (clubData[0]) ? clubData[0].introduction : "Not given"
     const charterDate = (clubData[0]) ? clubData[0].charterDate : "Not given"
-    let image = (clubData[0] && clubData[0].id) ? "http://localhost/api/getImage?imageId="+clubData[0].id : require('../../img/club-info-img/4.jpg')
+    let image = (clubData[0] && clubData[0].id) ? "http://localhost/api/getImage?imageId="+clubData[0].id : require('../../img/club-info-img/5.jpg')
 
     return (
         <div>

@@ -7,7 +7,7 @@ const Member = require('./models/Members.js')
 //routes
 const { getClubNames, getUserClubData, getClubData, saveClubIntro, editClubInfo } = require('./routes/club');
 const { authenticate, register } = require('./routes/user');
-const { saveMembers, saveProjects, getProjects } = require('./routes/data')
+const { saveMembers, saveProjects, getProjects, getProjectData } = require('./routes/data')
 const { getImage } = require('./routes/image');
 
 const bodyParser = require('body-parser');
@@ -60,6 +60,10 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/dist' + '/index.html'));
 })
 
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname + '/dist' + '/index.html'));
+})
+
 app.get('/about', (req, res) => {
     res.sendFile(path.join(__dirname + '/dist' + '/index.html'));
 })
@@ -92,10 +96,18 @@ app.get('/projectInfo', (req, res) => {
     res.sendFile(path.join(__dirname + '/dist' + '/index.html'));
 })
 
+app.get('/editProjectInfo', (req, res) => {
+    res.sendFile(path.join(__dirname + '/dist' + '/index.html'));
+})
+
+app.get('/editProjectInfo', (req, res) => {
+    res.sendFile(path.join(__dirname + '/dist' + '/index.html'));
+})
+
 app.post('/api/uploadImages', function (req, res) {
     let uploadFile = req.files.file;
     const name = uploadFile.name;
-    uploadFile.mv(`./tmp/tmp_images/${name}`, function (err) {
+    uploadFile.mv(`./img/tmp_images/${name}`, function (err) {
         if (err) {
             console.log(err)
             return res.status(500).send(err);
@@ -139,11 +151,13 @@ app.post('/api/getProjects', getProjects)
 
 app.post('/api/excelfile', withAuth, function (req, res) {
     let sampleFile = req.files.excel;
-    var appDir = path.dirname(require.main.filename);
+    let appDir = path.dirname(require.main.filename);
     sampleFile.mv(appDir + '/tmp/tmp_excel/' + req.files.excel.name, function (err) {
-        if (err)
+        if (err) {
+            console.log(err)
             return res.status(500).send(err);
-
+        }
+            
         readXlsxFile(appDir + '/tmp/tmp_excel/' + req.files.excel.name).then((rows) => {
             res.json({ data: rows });
         })
@@ -199,5 +213,7 @@ app.get('/api/signOut', withAuth, function (req, res) {
 app.get('/api/getClubData', getClubData)
 
 app.get('/api/getImage', getImage)
+
+app.post('/api/getProjectData', getProjectData)
 
 app.listen(process.env.PORT || 61001);

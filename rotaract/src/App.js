@@ -12,6 +12,8 @@ import ClubInfo from './components/ClubInfo';
 import Projects from './components/Projects';
 import ProjectInfo from './components/ProjectInfo';
 import ClubEditPage from './components/EditClubInfo';
+import EditProject from './components/EditProjectInfo';
+import Footer from './components/Footer'
 
 import { Route, Switch } from 'react-router-dom';
 
@@ -37,7 +39,9 @@ export default class App extends Component {
           <Route path="/projects" component={Projects} />
           <Route path="/projectInfo" component={ProjectInfo} />
           <Route path="/editClubInfo" component={withAuth(ClubEditPage)} />
+          <Route path="/editProjectInfo" component={withAuth(EditProject)} />
         </Switch>
+        <Footer />
       </div>
     );
   }

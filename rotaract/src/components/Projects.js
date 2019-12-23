@@ -31,7 +31,7 @@ const Projects = (props) => {
                 {projects.map((row, index) => (
                     <div key={index} className="project-card">
                         <Link to={{ pathname: "/projectInfo", state: { project_id: row.id, club_id: row.club_id } }}>
-                            <Card title={row.name} content={row.overview} image={(row.images.length) ? require(row.images.split("::")[0]) : require('../img/public/background.jpg')} />
+                            <Card title={row.name} content={row.overview} image={require('../img/public/background.jpg')} />
                         </Link>
                     </div>
                 ))}
