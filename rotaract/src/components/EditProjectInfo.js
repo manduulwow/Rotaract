@@ -20,7 +20,8 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
 const headers = {
-    "Accept": "application/json"
+    "Accept": "application/json",
+    'Content-Type': 'multipart/form-data'
 }
 
 const useStyles = makeStyles(theme => ({
@@ -53,14 +54,10 @@ const EditProject = (props) => {
     const [popUpState, setPopUpState] = useState(false)
     const [imageFileUrls, setImageFileUrls] = useState([])
     const [isUploaded, setIsUploaded] = useState(false)
-    // const [projectType, setProjectType] = useState({
-    //     health: false,
-    //     education: false,
-    //     none: false,
-    // })
+    const [imageIds, setImageIds] = useState(props.location.state.projectImages)    
 
-    const [health, setHealth] = useState(false)
-    const [education, setEducation] = useState(false)
+    const [health, setHealth] = useState(props.location.state.projectTypes.some(obj => obj.id === 1))
+    const [education, setEducation] = useState(props.location.state.projectTypes.some(obj => obj.id === 2))
     const [none, setNone] = useState(false)
 
     // const { health, education, none } = projectType;
@@ -102,24 +99,14 @@ const EditProject = (props) => {
     const handleTotalBudgetChange = (event) => {setTotalBudget(event.target.value)}
     const handleProjectNameChange = (event) => {setProjectName(event.target.value)}
 
-    useEffect(() => {
-        axios.post('/api/getProjectData', {
-            headers: headers,
-            club_id: props.location.state.club_id
-        })
-            .then(res => {
-                setclubData(res.data)
-            })
-            .catch(error => {
-                console.log(error)
-            });
-    }, []);
-
     const handleOnClick = () => {
+        const projectType = []
+        if(health)      projectType.push(1)
+        if(education)   projectType.push(2)
         axios.post('/api/editProjectData', {
             headers: headers,
             body: {
-                project_id: props.location.state.project_id,
+                project_id: props.location.state.projectData.id,
                 projectName: projectName,
                 totalBudget: totalBudget,
                 fundraising: fundraising,
@@ -132,18 +119,20 @@ const EditProject = (props) => {
                 numParticipants: numParticipants,
                 startedDate: startedDate,
                 finishedDate: finishedDate,
-                imageNames: imageNames
+                imageNames: imageNames,
+                projectType: projectType
             }
         })
-            .then(res => {
-                props.history.push({
-                    pathname: '/clubInfo',
-                    state: { club_id: props.location.state.club_id }
-                })
+        .then(res => {
+            console.log(res)
+            props.history.push({
+                pathname: '/projectInfo',
+                state: { project_id: props.location.state.projectData.id }
             })
-            .catch(error => {
-                console.log(error)
-            });
+        })
+        .catch(error => {
+            console.log(error)
+        });
     }
 
     const handleSubmit = () => {
@@ -165,16 +154,20 @@ const EditProject = (props) => {
         if (picture.length > 0) {
             let data = new FormData();
             let fileName = []
-            data.append('file', picture[picture.length - 1]);
+
+            console.log(picture)
 
             for (let i = 0; i < picture.length; i++) {
                 fileName.push(picture[i].name)
+                data.append('file', picture[i]);
             }
             setImageNames(fileName)
             axios.post('/api/uploadImages', data, {
                 headers: headers
             })
                 .then(res => {
+                    console.log("response : ")
+                    console.log(res)
                     if (res.status === 200) {
                         setImageFiles(picture)
                         setIsUploaded(true)
@@ -198,7 +191,7 @@ const EditProject = (props) => {
                     </div>
                     {/* <img src={(imageFileUrl) ? imageFileUrl : props.location.state.image} className="about-img" /> */}
                     <div className="img-slide-container">
-                        <Carousel imageSource={imageFileUrls}/>
+                        <Carousel imageSource={(imageFileUrls.length > 0) ? imageFileUrls : imageIds}/>
                     </div>
                 </div>
                 <div className="project-info-text">

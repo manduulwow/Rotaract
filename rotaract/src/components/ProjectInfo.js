@@ -34,7 +34,8 @@ const ProjectInfo = (props) => {
   const classes = useStyles();
   const [userClubId, setUserClubId] = useState(null);
   const [projectData, setProjectData] = useState({});
-
+  const [projectImages, setProjectImages] = useState([]);
+  const [projectTypes, setProjectTypes] = useState([]);
   fetch('/api/checkToken')
     .then(res => {
       if (res.status === 200)
@@ -42,23 +43,21 @@ const ProjectInfo = (props) => {
       return res.text()
     }).then(res => { setUserClubId(res) })
 
-  console.log(props.location.state.project_id, userClubId)
-
   useEffect(() => {
     axios.post('/api/getProjectData', {
       headers: headers,
       projectId: props.location.state.project_id
     })
       .then(res => {
-        setProjectData(res.data[0])
+        setProjectData(res.data.project[0])
+        setProjectImages(res.data.images)
+        setProjectTypes(res.data.projectType)
+        // console.log(res.data)
       })
       .catch(error => {
         console.log(error)
       });
   }, []);
-
-
-  console.log(projectData)
 
   return (
     <div>
@@ -67,15 +66,16 @@ const ProjectInfo = (props) => {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                {/* <img src={require('../../img/club-info-img/5.jpg')} className="about-img" /> */}
                 <div className="img-slide-container">
-                  <Carousel />
+                  <Carousel imageSource={projectImages}/>
                 </div>
               </Paper>
               <div className="">
                 <Link to={{
                   pathname: "/editProjectInfo", state: {
-                    projectData: projectData
+                    projectData: projectData,
+                    projectImages: projectImages,
+                    projectTypes: projectTypes
                   }
                 }}>
                   {(isLogged) ? <EditButton /> : ""}
@@ -116,7 +116,7 @@ const ProjectInfo = (props) => {
             <Grid item xs={3}>
               <Paper className={classes.paper}>
                 {
-                  (projectData.project_type) ? projectData.project_type : "None"
+                  (projectTypes.length > 0) ? projectTypes.map(type => type.type+" ") : "None"
                 }
               </Paper>
             </Grid>

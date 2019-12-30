@@ -1,5 +1,6 @@
 module.exports = {
     getImage: (req, res) => {
+        console.log("Get image called")
         const imageId = req.query.imageId
         let query = "SELECT * FROM `images` WHERE id=?";
         db.query(query, imageId, (err, data) => {

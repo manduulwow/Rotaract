@@ -7,7 +7,7 @@ const Member = require('./models/Members.js')
 //routes
 const { getClubNames, getUserClubData, getClubData, saveClubIntro, editClubInfo } = require('./routes/club');
 const { authenticate, register } = require('./routes/user');
-const { saveMembers, saveProjects, getProjects, getProjectData } = require('./routes/data')
+const { saveMembers, saveProjects, getProjects, getProjectData, editProjectData } = require('./routes/data')
 const { getImage } = require('./routes/image');
 
 const bodyParser = require('body-parser');
@@ -51,8 +51,6 @@ mysqlConnection.connect((err) => {
 })
 
 global.db = mysqlConnection;
-
-// app.get('/', (req, res) => res.send('Hello World!'))
 
 app.use(express.static(path.join(__dirname + '/dist')));
 
@@ -105,15 +103,25 @@ app.get('/editProjectInfo', (req, res) => {
 })
 
 app.post('/api/uploadImages', function (req, res) {
-    let uploadFile = req.files.file;
-    const name = uploadFile.name;
-    uploadFile.mv(`./img/tmp_images/${name}`, function (err) {
-        if (err) {
-            console.log(err)
-            return res.status(500).send(err);
-        }
-        return res.status(200).json({ status: 'uploaded', name, name });
-    });
+    let files = req.files.file;
+    if(isNaN(files.length)) {
+        let name = files.name
+        files.mv(`./img/tmp_images/${name}`, function (err) {
+            if (err) {
+                return res.send(500);
+            }
+        }); 
+    } else {
+        files.forEach(file => {
+            let name = file.name
+            file.mv(`./img/tmp_images/${name}`, function (err) {
+                if (err) {
+                    return res.send(500);
+                }
+            }); 
+        });
+    }
+    return res.send(200);
 });
 
 app.post('/api/editClubData', editClubInfo)
@@ -215,5 +223,7 @@ app.get('/api/getClubData', getClubData)
 app.get('/api/getImage', getImage)
 
 app.post('/api/getProjectData', getProjectData)
+
+app.post('/api/editProjectData', editProjectData)
 
 app.listen(process.env.PORT || 61001);
