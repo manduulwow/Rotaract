@@ -2,45 +2,13 @@ const fs = require('fs');
 const path = require('path')
 
 module.exports = {
-    getClubNames: (req, res) => {
-        let query = "SELECT * FROM `club`";
-        db.query(query, (err, clubs) => {
+    getMembers: (req, res, club_id) => {
+        let query = "SELECT * FROM `members`";
+        db.query(query, (err, members) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            return res.json({ data: clubs });
-        })
-    },
-    getUserClubData: (req, res, club_id) => {
-        let query = "SELECT a.*,b.id FROM `club` a LEFT JOIN `images` b ON a.club_page_img_id = b.id WHERE a.id=?"
-        db.query(query, club_id, (err, clubs) => {
-            if (err) {
-                return res.status(500).send(err);
-            }
-            return res.json(clubs);
-        })
-    },
-    getClubData: (req, res) => {
-        console.log("called")
-        let query = "SELECT * FROM `club`"
-        db.query(query, (err, clubs) => {
-            if (err) {
-                return res.status(500).send(err);
-            }
-            return res.json(clubs);
-        })
-    },
-    saveClubIntro: (req, res, club_id) => {
-        const data = req.body
-        const charterDate = data[1][1]
-        const introductionText = data[1][2]
-        let query = "UPDATE `club` SET introduction=?,charterDate=? WHERE id=?";
-        db.query(query, [introductionText, charterDate, club_id], (err, response) => {
-            if (err) {
-                console.log(err)
-                return res.status(500).send(err);
-            }
-            return res.json('Updated Introduction');
+            return res.json({ data: members });
         })
     },
     editClubInfo: (req, res, club_id) => {

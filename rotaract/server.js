@@ -9,6 +9,7 @@ const { getClubNames, getUserClubData, getClubData, saveClubIntro, editClubInfo 
 const { authenticate, register } = require('./routes/user');
 const { saveMembers, saveProjects, getProjects, getProjectData, editProjectData } = require('./routes/data')
 const { getImage } = require('./routes/image');
+const { getMembers } = require('./routes/member');
 
 const bodyParser = require('body-parser');
 global.jwt = require('jsonwebtoken');
@@ -102,6 +103,10 @@ app.get('/editProjectInfo', (req, res) => {
     res.sendFile(path.join(__dirname + '/dist' + '/index.html'));
 })
 
+app.get('/members', (req, res) => {
+    res.sendFile(path.join(__dirname + '/dist' + '/index.html'));
+})
+
 app.post('/api/uploadImages', function (req, res) {
     let files = req.files.file;
     if(isNaN(files.length)) {
@@ -159,17 +164,15 @@ app.post('/api/getProjects', getProjects)
 
 app.post('/api/excelfile', withAuth, function (req, res) {
     let sampleFile = req.files.excel;
-    let appDir = path.dirname(require.main.filename);
-    sampleFile.mv(appDir + '/tmp/tmp_excel/' + req.files.excel.name, function (err) {
+    sampleFile.mv(`./tmp/tmp_excel/${req.files.excel.name}`, function (err) {
         if (err) {
             console.log(err)
-            return res.status(500).send(err);
+            return res.send(500);
         }
-            
-        readXlsxFile(appDir + '/tmp/tmp_excel/' + req.files.excel.name).then((rows) => {
+        readXlsxFile(`./tmp/tmp_excel/${req.files.excel.name}`).then((rows) => {
             res.json({ data: rows });
         })
-    });
+    }); 
 })
 
 //data save from Excel
@@ -225,5 +228,7 @@ app.get('/api/getImage', getImage)
 app.post('/api/getProjectData', getProjectData)
 
 app.post('/api/editProjectData', editProjectData)
+
+app.post('/api/getMembers', getMembers)
 
 app.listen(process.env.PORT || 61001);

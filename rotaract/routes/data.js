@@ -35,8 +35,8 @@ module.exports = {
                 console.log(err)
                 return res.status(500).send(err);
             }
-            return res.json('Inserted Projects');
-        })
+            return res.send(200);
+        }) 
     },
     getProjects: (req, res) => {
         const club_id = req.body.club_id
@@ -90,8 +90,8 @@ module.exports = {
         const aim = data.body.aim
         const overview = data.body.overView
         const numParticipants = data.body.numParticipants
-        const startedDate = data.body.startedDate
-        const finishedDate = data.body.finishedDate
+        const startedDate = new Date(data.body.startedDate)
+        const finishedDate = new Date(data.body.finishedDate)
         const fileNames = data.body.imageNames
         const projectType = data.body.projectType
 
@@ -120,8 +120,9 @@ module.exports = {
                     })
                 })
             }
-            let query = "UPDATE projects SET name=?,co_organizers=?,total_budget=?,fundraising=?,num_participants=?,other_participants=?,beneficaries=?,started_date=?,finished_date=?,overview=?,aim=? WHERE id=?";
-            db.query(query, [projectName,coOrganizer,totalBudget,fundraising,numParticipants,otherParticipants,beneficaries,startedDate,finishedDate,overview,aim,project_id], (err, response) => {
+
+            let query = "UPDATE projects SET name=? ,co_organizers=?,total_budget=?,fundraising=?,num_participants=?,other_participants=?,beneficaries=?,started_date=?,finished_date=?,overview=?,aim=? WHERE id=?";
+            db.query(query, [projectName,coOrganizer,totalBudget,fundraising,numParticipants,otherParticipants,beneficaries,startedDate.getFullYear()+"-"+(startedDate.getMonth()+1)+"-"+startedDate.getDate(),finishedDate.getFullYear()+"-"+(finishedDate.getMonth()+1)+"-"+finishedDate.getDate(),overview,aim,project_id], (err, response) => {
                 if (err) {
                     console.log(err)
                     return res.status(500).send(err);

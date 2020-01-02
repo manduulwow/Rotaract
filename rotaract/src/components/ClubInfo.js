@@ -5,7 +5,7 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const headers = {
@@ -21,8 +21,8 @@ const ClubInformation = (props) => {
         .then(res => {
             if (res.status === 200)
                 dispatch({ type: 'SIGNIN' })
-                return res.text()
-        }).then(res => {setClubId(res)})
+            return res.text()
+        }).then(res => { setClubId(res) })
 
     useEffect(() => {
         axios.post('/api/getClubData', {
@@ -36,11 +36,11 @@ const ClubInformation = (props) => {
                 console.log(error)
             });
     }, []);
-    
+
     const name = (clubData[0]) ? clubData[0].name : "Not given"
     const introduction = (clubData[0]) ? clubData[0].introduction : "Not given"
     const charterDate = (clubData[0]) ? clubData[0].charterDate : "Not given"
-    let image = (clubData[0] && clubData[0].id) ? "http://localhost:3000/api/getImage?imageId="+clubData[0].id : require('../../img/club-info-img/5.jpg')
+    let image = (clubData[0] && clubData[0].id) ? window.location.origin + "/api/getImage?imageId=" + clubData[0].id : require('../../img/club-info-img/5.jpg')
     return (
         <div>
             <Container fixed>
@@ -53,7 +53,9 @@ const ClubInformation = (props) => {
                     </Link>
                 </div>
                 <div className="club-paper">
-                    <PaperSheet PaperTitle={"Members"} />
+                    <Link to={{ pathname: "/members", state: { club_id: props.location.state.club_id } }}>
+                        <PaperSheet PaperTitle={"Members"} />
+                    </Link>
                 </div>
                 <div className="club-paper">
                     <PaperSheet PaperTitle={"Board Members"} />

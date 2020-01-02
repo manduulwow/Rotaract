@@ -20,7 +20,7 @@ const Carousel = (props) => {
         mouseTrackingEnabled={true}
         items={
             (props.imageSource && props.imageSource.length > 0) ?
-                props.imageSource.map((src,key) => <img src={(typeof(src) !== 'object') ? src : "http://localhost:3000/api/getImage?imageId="+src.id} onDragStart={handleOnDragStart} className="yours-custom-class" />) :
+                props.imageSource.map((src,key) => <img src={(typeof(src) !== 'object') ? src : window.location.origin+"/api/getImage?imageId="+src.id} onDragStart={handleOnDragStart} className="yours-custom-class" />) :
                 [<img src={require('../../../img/club-info-img/5.jpg')} onDragStart={handleOnDragStart} className="yours-custom-class" />,
                  <img src={require('../../../img/club-info-img/4.jpg')} onDragStart={handleOnDragStart} className="yours-custom-class" />]
         } />

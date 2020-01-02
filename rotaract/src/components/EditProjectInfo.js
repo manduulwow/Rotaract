@@ -81,6 +81,7 @@ const EditProject = (props) => {
     }
 
     const handleStartedDateChange = (date) => {
+        console.log(new Date(date))
         setStartedDate(date)
     }
 
@@ -124,7 +125,6 @@ const EditProject = (props) => {
             }
         })
         .then(res => {
-            console.log(res)
             props.history.push({
                 pathname: '/projectInfo',
                 state: { project_id: props.location.state.projectData.id }

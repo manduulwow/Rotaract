@@ -70,6 +70,7 @@ export default class uploadExcel extends Component {
       }
     })
     .then(res => {
+      console.log(res)
       this.setState({dataLoaded : true})
       this.setState({data: res.data.data})
     }).catch(error => {
@@ -78,19 +79,13 @@ export default class uploadExcel extends Component {
   }
 
   fileUploadHandler = () => {
-    fetch('/api/'+this.state.api,
-      {
-          method: 'POST',
-          headers: new Headers({ 
-              'Content-Type': 'application/json'
-            }), 
-          body: JSON.stringify(this.state.data)
-      })
-    .then((res) => {
-      console.log(res.text())
+    axios.post('/api/'+this.state.api, this.state.data, {
+      headers: headers
     })
-    .catch((error) => {
-      console.error(error);
+    .then(res => {
+      console.log(res)
+    }).catch(error => {
+      console.log(error)
     });
   }
 
