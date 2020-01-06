@@ -57,7 +57,7 @@ const Members = (props) => {
                                     <Avatar alt="Remy Sharp" src={require('../../img/club-member-img/default.jpg')} />
                                 </ListItemAvatar>
                                 <ListItemText
-                                    primary={row.first_name+" "+row.last_name}
+                                    primary={row.first_name + " " + row.last_name}
                                     secondary={
                                         <React.Fragment>
                                             <Typography
@@ -66,16 +66,22 @@ const Members = (props) => {
                                                 className={classes.inline}
                                                 color="textPrimary"
                                             >
-                                            {row.member_type}
+                                                {row.member_type}
                                             </Typography>
                                             {" — Joined Date " + row.joined_date}
                                         </React.Fragment>
                                     }
                                 />
                                 <ListItemSecondaryAction >
-                                    <IconButton edge="end" aria-label="comments">
-                                        <CommentIcon />
-                                    </IconButton>
+                                    <Link to={{
+                                        pathname: "/memberProfile", state: {
+                                            memberId: row.id
+                                        }
+                                    }}>
+                                        <IconButton edge="end" aria-label="comments">
+                                            <CommentIcon />
+                                        </IconButton>
+                                    </Link>
                                 </ListItemSecondaryAction>
                             </ListItem>
                             <Divider variant="inset" component="li" />

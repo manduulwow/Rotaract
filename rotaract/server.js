@@ -9,7 +9,7 @@ const { getClubNames, getUserClubData, getClubData, saveClubIntro, editClubInfo 
 const { authenticate, register } = require('./routes/user');
 const { saveMembers, saveProjects, getProjects, getProjectData, editProjectData } = require('./routes/data')
 const { getImage } = require('./routes/image');
-const { getMembers } = require('./routes/member');
+const { getMembers,getMemberData } = require('./routes/member');
 
 const bodyParser = require('body-parser');
 global.jwt = require('jsonwebtoken');
@@ -104,6 +104,10 @@ app.get('/editProjectInfo', (req, res) => {
 })
 
 app.get('/members', (req, res) => {
+    res.sendFile(path.join(__dirname + '/dist' + '/index.html'));
+})
+
+app.get('/memberProfile', (req, res) => {
     res.sendFile(path.join(__dirname + '/dist' + '/index.html'));
 })
 
@@ -230,5 +234,7 @@ app.post('/api/getProjectData', getProjectData)
 app.post('/api/editProjectData', editProjectData)
 
 app.post('/api/getMembers', getMembers)
+
+app.post('/api/memberData', getMemberData)
 
 app.listen(process.env.PORT || 61001);

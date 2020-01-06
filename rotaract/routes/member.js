@@ -2,13 +2,24 @@ const fs = require('fs');
 const path = require('path')
 
 module.exports = {
-    getMembers: (req, res, club_id) => {
-        let query = "SELECT * FROM `members`";
-        db.query(query, (err, members) => {
+    getMembers: (req, res) => {
+        const club_id = req.body.club_id
+        let query = "SELECT * FROM `members` where club_id=?";
+        db.query(query, club_id,(err, members) => {
             if (err) {
                 return res.status(500).send(err);
             }
             return res.json({ data: members });
+        })
+    },
+    getMemberData: (req, res) => {
+        const memberId = req.body.memberId
+        let query = "SELECT * FROM `members` where id=?";
+        db.query(query, memberId,(err, member) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            return res.json({ data: member });
         })
     },
     editClubInfo: (req, res, club_id) => {

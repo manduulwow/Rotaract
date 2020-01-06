@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale; */
+  font-family: Poppins;
+  font-style: normal;
 }
 
 code {
@@ -15,40 +18,58 @@ code {
 .MainMenu{
   text-align: center;
 }
-
 .MainMenu li{
   display: inline-block;
-  padding: 24px 10px;
-  font-family: 'open-sans-bold', AvenirNext-Medium, sans-serif;
-  color: #757575;
-  text-transform: uppercase;
-  font-size: 18px;
+  padding: 30px 10px;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+  color: #FAFAFA;
+  border-bottom: solid 4px #1e1e20;
 }
-
+.MainMenu li:hover{
+  color: #f9136b;
+  border-color: #f9136b;
+}
+ul{
+  list-style-type: none;
+  margin: 0;
+}
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 .Settings-Buttons{
-  left: calc(100% - 300px);
-  display: inline-block;
-  position: relative;
+  /* left: calc(100% - 300px); */
+  /* display: inline-block; */
+  /* position: relative; */
   cursor: pointer;
-  width: 250px;
+  width: 160px;
+  float: right;
 }
-
+.Settings-Buttons ul{
+  margin-top: 8px;
+}
 .Settings-Buttons li{
   display: inline-block;
   padding: 0px 10px;
   font-family: 'open-sans-bold', AvenirNext-Medium, sans-serif;
   color: #757575;
-  text-transform: uppercase
+  text-transform: uppercase;
 }
 
 .Logo{
   display: inline-block;
+  width: 200px;
+  float: left;
+  margin-left: 21px;
 }
-
+.Logo img{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
 .Login-form{
   display: block;
   margin: auto;
@@ -99,12 +120,11 @@ a {
 }
 
 .MainImageField{
-  border: solid 1px;
+  width: 90%;
+  border-bottom: 1px solid rgba(61, 61, 61, 0.5);
   height: 500px;
-}
-
-a{
-  color: purple;
+  margin: auto;
+  padding: 0 18px;
 }
 .about-img{
   width: 100%;
@@ -169,4 +189,170 @@ textarea{
 }
 img{
   object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.member-image{
+  max-width: 300px;
+  max-height: 300px;
+}
+.member-image img{
+  width: 100%;
+  height: 100%;
+}
+#mainMenu-container{
+  display: inline-block;
+}
+#Header{
+  background-color: #1e1e20;
+  height: 100px;
+}
+#header-container{
+  width: 85%;
+  margin: auto;
+  position: relative;
+  top: 5px;
+}
+#about-image-container{
+  height: calc(100vh - 100px);
+}
+#parallax {
+  background-image: linear-gradient(to right bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/about-img/tomato.jpg');
+  height: 100%; 
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#parallex-text{
+  color: white;
+  width: 847px;
+  height: 400px;
+  margin: auto;
+}
+#parallex-upper-text{
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  position: relative;
+  top: 200px;
+}
+#parallex-text span{
+  font-weight: 500;
+}
+.first-span{
+  font-size: 55px;
+  line-height: 82px;
+}
+#second-span{
+  font-size: 35px;
+  line-height: 52px;
+  margin: 0 21px 0 21px;
+}
+#parallex-upper-text h3{
+  margin-left: 6px;
+  margin-right: 6px;
+}
+#parallex-lower-text{
+  position: relative;
+  top: 221px;
+  font-weight: normal;
+  font-size: 25px;
+  line-height: 37px;
+  text-align: center;
+}
+#chart{
+  width: 70%;
+  float: right;
+  height: 100%;
+}
+#chart-text{
+  width: 29%;
+  height: 100%;
+  float: left;
+}
+#chart-text-title{
+  margin-top: 80px;
+}
+.about-info-section1{
+  width: 1000px;
+  margin: auto;
+  position: relative;
+  top: 100px;
+  opacity: 0;
+  margin-bottom: 200px;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 30px;
+}
+.about-info1-left{
+  width: 468px;
+  height: 471px;
+  display: inline-block;
+}
+.about-info1-right{
+  width: 433px;
+  height: 455px;
+  display: inline-block;
+  float: right;
+}
+.about-info2-left{
+  width: 433px;
+  height: 455px;
+  display: inline-block;
+}
+.about-info2-right{
+  width: 468px;
+  height: 471px;
+  display: inline-block;
+  float: right;
+}
+.about-animate-field{
+  transition: 1s ease;
+}
+.visible{
+  top: 0px !important;
+  opacity: 1 !important;
+}
+#about-info-container{
+  margin-top: 50px;
+}
+#parallex-scroll-btn{
+  height: 50px;
+  width: 50px;
+  position: relative;
+  margin: auto;
+  top: 105%;
+  background-color: #f9136b;
+  border-radius: 100%;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  transition: 0.2s ease-in-out;
+}
+#parallex-scroll-btn:hover{
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transform: scale(1.05);
+}
+#parallex-scroll-btn img{
+  height: 15px;
+  width: 15px;
+  position: relative;
+  left: 17px;
+  top: 15px;
+}
+#chart-text-title{
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 45px;
+  color: #000000;
+}
+#chart-text-content{
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 30px;
+  color: #000000;
+}
+#footer{
+  height: 210px;
+  background: #2D2D2F;
 }
