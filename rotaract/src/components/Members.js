@@ -31,7 +31,7 @@ const headers = {
 const Members = (props) => {
     const classes = useStyles();
     const [members, setMembers] = useState([]);
-    const clubId = (props.location.state) ? props.location.state.club_id : null
+    const clubId = (props.clubId) ? props.clubId : null
 
     useEffect(() => {
         axios.post('/api/getMembers', {

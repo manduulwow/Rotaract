@@ -13,7 +13,9 @@ const Members = (props) => {
     const dispatch = useDispatch()
     const isLogged = useSelector(state => state.isLogged)
     const [member, setMember] = useState({});
+    const [types, setTypes] = useState({});
     const memberId = (props.location.state) ? props.location.state.memberId : null
+    const [userClubId, setUserClubId] = useState(null);
 
     fetch('/api/checkToken').then(res => {
       if (res.status === 200)
@@ -27,8 +29,9 @@ const Members = (props) => {
             memberId: memberId
         })
             .then(res => {
-                console.log(res.data.data[0])
+                console.log(res)
                 setMember(res.data.data[0])
+                setTypes(res.data.types[0])
             }).catch(error => {
                 console.log(error)
             });
@@ -47,7 +50,8 @@ const Members = (props) => {
                     <div>
                         <Link to={{
                             pathname: "/editMemberInfo", state: {
-                                memberId: member.id
+                                member: member,
+                                types: types
                             }
                         }}>
                             {(isLogged) ? <EditButton /> : ""}

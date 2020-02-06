@@ -4,7 +4,6 @@ import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-
 const headers = {
   "Accept": "application/json"
 }

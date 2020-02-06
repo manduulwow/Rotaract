@@ -3,13 +3,15 @@ const mysql = require('mysql')
 
 const ClubIntroduction = require('./models/ClubIntroduction.js')
 const Member = require('./models/Members.js')
+const multer  = require('multer')
+const upload = multer({ dest: './img/club-member-img' })
 
 //routes
 const { getClubNames, getUserClubData, getClubData, saveClubIntro, editClubInfo } = require('./routes/club');
 const { authenticate, register } = require('./routes/user');
 const { saveMembers, saveProjects, getProjects, getProjectData, editProjectData } = require('./routes/data')
 const { getImage } = require('./routes/image');
-const { getMembers,getMemberData } = require('./routes/member');
+const { getMembers, getMemberData, getMembersByName, editMemberData } = require('./routes/member');
 
 const bodyParser = require('body-parser');
 global.jwt = require('jsonwebtoken');
@@ -111,6 +113,10 @@ app.get('/memberProfile', (req, res) => {
     res.sendFile(path.join(__dirname + '/dist' + '/index.html'));
 })
 
+app.get('/editMemberInfo', (req, res) => {
+    res.sendFile(path.join(__dirname + '/dist' + '/index.html'));
+})
+
 app.post('/api/uploadImages', function (req, res) {
     let files = req.files.file;
     if(isNaN(files.length)) {
@@ -153,12 +159,6 @@ app.get('/api/getUserClubData', withAuth, function (req, res) {
 })
 
 app.get('/api/getClubData', getClubNames)
-
-// app.get('/api/getClubData', function(req, res) {
-//     console.log(req.body)
-//     const club_id = GetClubIdFromToken(req)
-//     getUserClubData(req,res,club_id)
-// })
 
 app.post('/api/getClubData', function (req, res) {
     getUserClubData(req, res, req.body.club_id)
@@ -235,6 +235,10 @@ app.post('/api/editProjectData', editProjectData)
 
 app.post('/api/getMembers', getMembers)
 
+app.post('/api/getMembersByName', getMembersByName)
+
 app.post('/api/memberData', getMemberData)
+
+app.post('/api/editMemberData', editMemberData)
 
 app.listen(process.env.PORT || 61001);

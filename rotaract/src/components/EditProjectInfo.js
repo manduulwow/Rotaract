@@ -81,7 +81,6 @@ const EditProject = (props) => {
     }
 
     const handleStartedDateChange = (date) => {
-        console.log(new Date(date))
         setStartedDate(date)
     }
 

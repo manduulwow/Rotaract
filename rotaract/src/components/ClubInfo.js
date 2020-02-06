@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import Slider from './Slider'
 
 
 const headers = {
@@ -36,6 +37,8 @@ const ClubInformation = (props) => {
                 console.log(error)
             });
     }, []);
+
+    const box = [1, 2, 3, 4, 5]
 
     const name = (clubData[0]) ? clubData[0].name : "Not given"
     const introduction = (clubData[0]) ? clubData[0].introduction : "Not given"
@@ -91,6 +94,9 @@ const ClubInformation = (props) => {
                     </div>
                 </div>
             </Container>
+            <div className="box-wrapper" >
+                <Slider clubId={props.location.state.club_id}></Slider>
+            </div>
         </div>
     )
 }

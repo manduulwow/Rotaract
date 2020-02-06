@@ -42,6 +42,7 @@
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.3.0",
+    "react-scroll": "^1.7.15",
     "react-visibility-sensor": "^5.1.1",
     "reactjs-popup": "^1.5.0",
     "read-excel-file": "^4.0.2",

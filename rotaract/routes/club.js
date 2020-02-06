@@ -21,7 +21,6 @@ module.exports = {
         })
     },
     getClubData: (req, res) => {
-        console.log("called")
         let query = "SELECT * FROM `club`"
         db.query(query, (err, clubs) => {
             if (err) {
