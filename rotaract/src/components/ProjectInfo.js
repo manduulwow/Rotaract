@@ -12,6 +12,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom';
 import EditButton from './function/MaterialDesignEdit';
 import Carousel from './function/AliceCarousel';
+import { Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,8 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: 'center',
-    // color: theme.palette.text.secondary,
+    textAlign: 'center'
   }
 }));
 
@@ -44,6 +44,7 @@ const ProjectInfo = (props) => {
     }).then(res => { setUserClubId(res) })
 
   useEffect(() => {
+    scroll.scrollToTop();
     axios.post('/api/getProjectData', {
       headers: headers,
       projectId: props.location.state.project_id
@@ -52,7 +53,7 @@ const ProjectInfo = (props) => {
         setProjectData(res.data.project[0])
         setProjectImages(res.data.images)
         setProjectTypes(res.data.projectType)
-        // console.log(res.data)
+        console.log(res.data)
       })
       .catch(error => {
         console.log(error)
@@ -75,10 +76,11 @@ const ProjectInfo = (props) => {
                   pathname: "/editProjectInfo", state: {
                     projectData: projectData,
                     projectImages: projectImages,
-                    projectTypes: projectTypes
+                    projectTypes: projectTypes,
+                    club_id: props.location.state.club_id
                   }
                 }}>
-                  {(isLogged) ? <EditButton /> : ""}
+                  {(isLogged && props.location.state.club_id == userClubId) ? <EditButton /> : ""}
                 </Link>
               </div>
             </Grid>

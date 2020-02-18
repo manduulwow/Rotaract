@@ -126,7 +126,10 @@ const EditProject = (props) => {
         .then(res => {
             props.history.push({
                 pathname: '/projectInfo',
-                state: { project_id: props.location.state.projectData.id }
+                state: { 
+                    project_id: props.location.state.projectData.id,
+                    club_id: props.location.state.club_id
+                }
             })
         })
         .catch(error => {

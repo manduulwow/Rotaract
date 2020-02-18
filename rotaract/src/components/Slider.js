@@ -38,9 +38,12 @@ const Slider = (props) => {
     }
 
     const onChange = (event) => {
+        setSlidePos(0)
+        setSlideIndex(0)
         axios.post('/api/getMembersByName', {
             headers: headers,
-            name: event.target.value
+            name: event.target.value,
+            club_id: props.clubId
         })
             .then(res => {
                 setData(res.data.data)
@@ -50,23 +53,23 @@ const Slider = (props) => {
     }
 
     let slideBox = []
-
     for (let i = 0; i < data.length - 12; i += 12) {
         let cards = []
         for (let j = i; j < i + 12; j++) {
             let card =
                 <Link to={{
                     pathname: "/memberProfile", state: {
-                        memberId: (data[j]) ? data[j].id : 0
+                        memberId: (data[j]) ? data[j].id : 0,
+                        club_id: props.clubId
                     }
                 }}>
-                    <div className={((j >= i + 9) ? "card-lastRow" : "") + " member-card " + ((j % 3 == 0) ? "card-firstColumn" : "")} key={j}>
+                    <div className={((j >= i + 8) ? "card-lastRow" : "") + " member-card " + ((j % 4 == 0) ? "card-firstColumn" : "")} key={j}>
                         <div className="left">
-                            <img src={require('../../img/club-member-img/default.jpg')}></img>
+                            <img src={(data[j].image_id > 0) ? window.location.origin + "/api/getImage?imageId=" + data[j].image_id : require('../../img/club-member-img/default.jpg')}></img>
                         </div>
                         <div className="right">
-                            <div className="member-name">{(data[j]) ? data[j].first_name + " " + data[j].last_name : "Empty"}</div>
-                            <div className="member-date">Joined on {(data[j]) ? data[j].joined_date.substr(0, 10) : ""}</div>
+                            <div className="member-name">{(data[j] && data[j].last_name) ? data[j].last_name.substr(0,1)+". "+data[j].first_name : "Empty"}</div>
+                            <div className="member-date">Joined on {(data[j] && data[j].joined_date) ? data[j].joined_date.substr(0, 10) : ""}</div>
                         </div>
 
                     </div>
@@ -81,15 +84,22 @@ const Slider = (props) => {
     let count = 0
     for (let i = data.length - data.length % 12; i < data.length; i++) {
         let card =
-            <div className={((count >= 9) ? "card-lastRow" : "") + " member-card " + ((i % 3 == 0) ? "card-firstColumn" : "")} key={i}>
-                <div className="left">
-                    <img src={require('../../img/club-member-img/default.jpg')}></img>
+            <Link to={{
+                pathname: "/memberProfile", state: {
+                    memberId: (data[i]) ? data[i].id : 0,
+                    club_id: props.clubId
+                }
+            }}>
+                <div className={((count >= 8) ? "card-lastRow" : "") + " member-card " + ((i % 4 == 0) ? "card-firstColumn" : "")} key={i}>
+                    <div className="left">
+                        <img src={(data[i].image_id > 0) ? window.location.origin + "/api/getImage?imageId=" + data[i].image_id : require('../../img/club-member-img/default.jpg')}></img>
+                    </div>
+                    <div className="right">
+                        <div className="member-name">{(data[i] && data[i].last_name) ? data[i].last_name.substr(0,1)+". "+data[i].first_name : "Empty"}</div>
+                        <div className="member-date">Joined on {(data[i] && data[i].joined_date) ? data[i].joined_date.substr(0, 10) : ""}</div>
+                    </div>
                 </div>
-                <div className="right">
-                    <div className="member-name">{(data[i]) ? data[i].first_name + " " + data[i].last_name : "Empty"}</div>
-                    <div className="member-date">Joined on {(data[i]) ? data[i].joined_date.substr(0, 10) : ""}</div>
-                </div>
-            </div>
+            </Link>
         cards.push(card)
         count++
     }

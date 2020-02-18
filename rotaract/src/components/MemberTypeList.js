@@ -44,6 +44,8 @@ const MemberType = (props) => {
         handleTypeChange(event.target.value,index)
     }
 
+    console.log(props.list)
+
     return (
         <div>
             {
@@ -53,7 +55,7 @@ const MemberType = (props) => {
                             <InputLabel id="demo-simple-select-label">Member Type</InputLabel>
                             <Select
                                 id="demo-simple-select"
-                                value={obj.id}
+                                value={obj.member_type_id}
                                 onChange={(e) => typeChange(e,index)}
                             >
                                 <MenuItem value={'1'}>President</MenuItem>
@@ -73,7 +75,7 @@ const MemberType = (props) => {
                                 id="date-picker-dialog"
                                 format="MM/dd/yyyy"
                                 label="Started Date"
-                                value={obj.startDate}
+                                value={obj.start_date}
                                 onChange={(e) => handleStartedDateChange(e,index)}
                                 KeyboardButtonProps={{
                                     'aria-label': 'change date',
@@ -86,7 +88,7 @@ const MemberType = (props) => {
                                 id="date-picker-dialog"
                                 format="MM/dd/yyyy"
                                 label="Finished Date"
-                                value={obj.finishedDate}
+                                value={obj.end_date}
                                 onChange={(e) => handleFinishedDateChange(e,index)}
                                 KeyboardButtonProps={{
                                     'aria-label': 'change date',

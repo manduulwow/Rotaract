@@ -1,8 +1,6 @@
 const express = require('express')
 const mysql = require('mysql')
 
-const ClubIntroduction = require('./models/ClubIntroduction.js')
-const Member = require('./models/Members.js')
 const multer  = require('multer')
 const upload = multer({ dest: './img/club-member-img' })
 
@@ -11,7 +9,7 @@ const { getClubNames, getUserClubData, getClubData, saveClubIntro, editClubInfo 
 const { authenticate, register } = require('./routes/user');
 const { saveMembers, saveProjects, getProjects, getProjectData, editProjectData } = require('./routes/data')
 const { getImage } = require('./routes/image');
-const { getMembers, getMemberData, getMembersByName, editMemberData } = require('./routes/member');
+const { getMembers, getMemberData, getMembersByName, editMemberData, getBoardMembers } = require('./routes/member');
 
 const bodyParser = require('body-parser');
 global.jwt = require('jsonwebtoken');
@@ -65,6 +63,10 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname + '/dist' + '/index.html'));
 })
 
+app.get('/signin', (req, res) => {
+    res.sendFile(path.join(__dirname + '/dist' + '/index.html'));
+})
+
 app.get('/about', (req, res) => {
     res.sendFile(path.join(__dirname + '/dist' + '/index.html'));
 })
@@ -114,6 +116,10 @@ app.get('/memberProfile', (req, res) => {
 })
 
 app.get('/editMemberInfo', (req, res) => {
+    res.sendFile(path.join(__dirname + '/dist' + '/index.html'));
+})
+
+app.get('/signup', (req, res) => {
     res.sendFile(path.join(__dirname + '/dist' + '/index.html'));
 })
 
@@ -240,5 +246,7 @@ app.post('/api/getMembersByName', getMembersByName)
 app.post('/api/memberData', getMemberData)
 
 app.post('/api/editMemberData', editMemberData)
+
+app.post('/api/getBoardMembers', getBoardMembers)
 
 app.listen(process.env.PORT || 61001);

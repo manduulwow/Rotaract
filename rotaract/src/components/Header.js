@@ -15,7 +15,7 @@ function SignInOut() {
     if (isLoggedIn) {
         return <li onClick={onClick}>Logout</li>;
     }
-    return <li><Link to="/login">Login</Link></li>;
+    return <li><Link to="/signin">Login</Link></li>;
 }
 
 export default class Header extends Component {
@@ -31,14 +31,14 @@ export default class Header extends Component {
                     <div id="mainMenu-container">
                         <nav className="MainMenu">
                             <ul>
-                                <li><Link to="/about">About</Link></li>
-                                <li><Link to="/clubs">Clubs</Link></li>
-                                <li><Link to="/projects">Projects</Link></li>
-                                <li><Link to="/event">Event</Link></li>
-                                <li><Link to="/international">International</Link></li>
-                                <li><Link to="/calendar">Calendar</Link></li>
-                                <li><Link to="/contact">Contact</Link></li>
-                                <li><Link to="/donate">Donate</Link></li>
+                                <Link to="/about"><li>About</li></Link>
+                                <Link to="/clubs"><li>Clubs</li></Link>
+                                <Link to="/projects"><li>Projects</li></Link>
+                                <Link to="/event"><li>Event</li></Link>
+                                <Link to="/international"><li>International</li></Link>
+                                <Link to="/calendar"><li>Calendar</li></Link>
+                                <Link to="/contact"><li>Contact</li></Link>
+                                <Link to="/donate"><li>Donate</li></Link>
                             </ul>
                         </nav>
                     </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Home from './components/Home';
 import Secret from './components/UploadDataType';
 import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
 import Login from './components/Login';
 import UploadExcel from './components/UploadExcel';
 import withAuth from './withAuth';
@@ -34,6 +35,7 @@ export default class App extends Component {
           <Route path="/signup" component={SignUp} />
           <Route path="/secret" component={withAuth(Secret)} />
           <Route path="/login" render={(props) => <Login {...props} isAuthed={true} />} />
+          <Route path="/signin" render={(props) => <SignIn {...props} isAuthed={true} />} />
           <Route path="/uploadExcel" component={withAuth(UploadExcel)} />
           <Route path="/clubInfo" component={ClubInfo} />
           <Route path="/projects" component={Projects} />

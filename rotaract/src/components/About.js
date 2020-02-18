@@ -3,7 +3,6 @@ import Tree from './ForcedDirectedTree';
 import Transition from './function/transition';
 import AboutInfoType1 from './AboutInfoType1';
 import AboutInfoType2 from './AboutInfoType2';
-import * as Scroll from 'react-scroll';
 import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
 

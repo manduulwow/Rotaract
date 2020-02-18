@@ -7,6 +7,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Slider from './Slider'
+import BoardMemberSlider from './BoardMemberSlider'
+import { Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 
 
 const headers = {
@@ -26,6 +28,7 @@ const ClubInformation = (props) => {
         }).then(res => { setClubId(res) })
 
     useEffect(() => {
+        scroll.scrollToTop();
         axios.post('/api/getClubData', {
             headers: headers,
             club_id: props.location.state.club_id
@@ -37,8 +40,6 @@ const ClubInformation = (props) => {
                 console.log(error)
             });
     }, []);
-
-    const box = [1, 2, 3, 4, 5]
 
     const name = (clubData[0]) ? clubData[0].name : "Not given"
     const introduction = (clubData[0]) ? clubData[0].introduction : "Not given"
@@ -54,14 +55,6 @@ const ClubInformation = (props) => {
                     <Link to={{ pathname: "/projects", state: { club_id: props.location.state.club_id } }}>
                         <PaperSheet PaperTitle={"Projects"} />
                     </Link>
-                </div>
-                <div className="club-paper">
-                    <Link to={{ pathname: "/members", state: { club_id: props.location.state.club_id } }}>
-                        <PaperSheet PaperTitle={"Members"} />
-                    </Link>
-                </div>
-                <div className="club-paper">
-                    <PaperSheet PaperTitle={"Board Members"} />
                 </div>
                 <div className="club-info-text">
                     <div className="">
@@ -96,6 +89,9 @@ const ClubInformation = (props) => {
             </Container>
             <div className="box-wrapper" >
                 <Slider clubId={props.location.state.club_id}></Slider>
+            </div>
+            <div className="box-wrapper board-wrapper" >
+                <BoardMemberSlider clubId={props.location.state.club_id}></BoardMemberSlider>
             </div>
         </div>
     )

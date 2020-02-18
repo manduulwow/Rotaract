@@ -13,6 +13,7 @@ import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import MemberType from './MemberTypeList';
+import { FormControlLabel } from '@material-ui/core';
 
 
 const headers = {
@@ -33,34 +34,29 @@ const useStyles = makeStyles(theme => ({
 const MemberEditPage = (props) => {
     const classes = useStyles();
     const [member, setMember] = useState(props.location.state.member)
-    const [types, setTypes] = useState((props.location.state.types) ? props.location.state.types : [{ id: 7, started_date: new Date, finished_date: new Date }])
+    const [types, setTypes] = useState((props.location.state.types && props.location.state.types.length > 0) ? props.location.state.types : [{ member_id: member.id, member_type_id: 7, start_date: new Date, end_date: new Date }])
     const [popUpState, setPopUpState] = useState(false)
     const [imageFileUrl, setImageFileUrl] = useState()
     const [isUploaded, setIsUploaded] = useState(false)
     const [fileName, setFileName] = useState('')
     const [file, setFile] = useState()
-    const [list, setList] = useState([{
-        type: 1,
-        startDate: new Date,
-        finishedDate: new Date
-    }]);
-
     const deleteItem = (index) => {
-        setTypes(types.filter((el, i) => i != index))
+        if(types.length > 1)
+            setTypes(types.filter((el, i) => i != index))
     }
     const changeStartDate = (date, index) => {
         let ar = [...types]
-        ar[index].startDate = date
+        ar[index].start_date = date
         setTypes(ar)
     }
     const changeFinishedDate = (date, index) => {
         let ar = [...types]
-        ar[index].finishedDate = date
+        ar[index].end_date = date
         setTypes(ar)
     }
     const handleTypeChange = (type, index) => {
         let ar = [...types]
-        ar[index].id = type
+        ar[index].member_type_id = type
         setTypes(ar)
     }
     const popUpControl = () => {
@@ -72,8 +68,25 @@ const MemberEditPage = (props) => {
         else
             setPopUpState(true)
     }
-    const handleMemberIdChange = () => {
-
+    const handleMemberIdChange = (event) => {
+        let tmp = { ...member }
+        tmp.member_id = event.target.value
+        setMember(tmp)
+    }
+    const handleFirstNameChange = (event) => {
+        let tmp = { ...member }
+        tmp.first_name = event.target.value
+        setMember(tmp)
+    }
+    const handleLastNameChange = (event) => {
+        let tmp = { ...member }
+        tmp.last_name = event.target.value
+        setMember(tmp)
+    }
+    const handleRegisterChange = (event) => {
+        let tmp = { ...member }
+        tmp.register_num = event.target.value
+        setMember(tmp)
     }
     const handleJoinedDateChange = (date) => {
         let tmp = { ...member }
@@ -82,15 +95,13 @@ const MemberEditPage = (props) => {
     }
     const addMemberType = () => {
         setTypes([...types, {
-            type: 1,
-            startDate: new Date,
-            finishedDate: new Date
+            member_id: member.id,
+            member_type_id: 7,
+            start_date: new Date,
+            end_date: new Date
         }])
     }
     const handleOnClick = () => {
-        console.log('File name : '+fileName)
-        console.log('member : '+ JSON.stringify(member))
-        console.log('types : ' + JSON.stringify(types))
         axios.post('/api/editMemberData', {
             headers: headers,
             body: {
@@ -100,11 +111,13 @@ const MemberEditPage = (props) => {
             }
         })
         .then(res => {
-            console.log(res)
-            // props.history.push({
-            //     pathname: '/projectInfo',
-            //     state: { project_id: props.location.state.projectData.id }
-            // })
+            props.history.push({
+                pathname: '/memberProfile',
+                state: { 
+                    memberId: props.location.state.member.id,
+                    club_id: props.location.state.club_id
+                }
+            })
         })
         .catch(error => {
             console.log(error)
@@ -170,7 +183,7 @@ const MemberEditPage = (props) => {
                             label="FirstName"
                             fullWidth
                             defaultValue={member.first_name}
-                            onChange={handleMemberIdChange}
+                            onChange={handleFirstNameChange}
                         />
                         <TextField
                             className="profileInput"
@@ -180,7 +193,7 @@ const MemberEditPage = (props) => {
                             label="LastName"
                             fullWidth
                             defaultValue={member.last_name}
-                            onChange={handleMemberIdChange}
+                            onChange={handleLastNameChange}
                         />
                         <TextField
                             className="profileInput"
@@ -190,7 +203,7 @@ const MemberEditPage = (props) => {
                             label="Register Number"
                             fullWidth
                             defaultValue={member.register_num}
-                            onChange={handleMemberIdChange}
+                            onChange={handleRegisterChange}
                         />
                         <MuiPickersUtilsProvider className="profileDate" utils={DateFnsUtils}>
                             <KeyboardDatePicker

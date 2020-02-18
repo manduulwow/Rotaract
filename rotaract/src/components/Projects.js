@@ -3,6 +3,7 @@ import Card from './function/materialDesignCard';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 
 
 const headers = {
@@ -31,7 +32,7 @@ const Projects = (props) => {
                 {projects.map((row, index) => (
                     <div key={index} className="project-card">
                         <Link to={{ pathname: "/projectInfo", state: { project_id: row.id, club_id: row.club_id } }}>
-                            <Card title={row.name} content={row.overview} image={require('../img/public/background.jpg')} />
+                            <Card title={row.name} content={row.overview} image={(row.image_id) ? window.location.origin + "/api/getImage?imageId=" +row.image_id : require('../img/public/background.jpg')} />
                         </Link>
                     </div>
                 ))}

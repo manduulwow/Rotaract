@@ -40,14 +40,12 @@ module.exports = {
     },
     getProjects: (req, res) => {
         const club_id = req.body.club_id
-        let query = (club_id) ? "SELECT * FROM `projects` WHERE club_id=?" : "SELECT * FROM `projects`"
+        let query = (club_id) ? "SELECT a.*,b.image_id FROM `projects` a LEFT JOIN `project_images` b ON a.`id`=b.`project_id` WHERE a.club_id=? GROUP BY a.`id`" : "SELECT a.*,b.image_id FROM `projects` a LEFT JOIN `project_images` b ON a.`id`=b.`project_id` GROUP BY a.`id`"
         db.query(query,club_id, (err, projects) => {
             if (err) {
                 console.log(err)
                 return res.status(500).send(err)
             }
-            // console.log(projects)
-
             return res.json(projects);
         })
     },
@@ -56,6 +54,7 @@ module.exports = {
         let query = "SELECT * FROM `projects` where id=?"
         db.query(query,projectId, (err, project) => {
             if (err) {
+                console.log(err)
                 return res.status(500).send(err)
             }
 
