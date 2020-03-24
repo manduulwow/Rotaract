@@ -20,21 +20,29 @@ body {
   font-family: popRegular;
   font-style: normal;
 }
-
+ul{
+  padding: 0;
+}
+#body-container{
+  min-height: 800px;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
 .MainMenu{
   text-align: center;
-  margin-top: 1px;
+  margin: auto;
+  width: 886px;
+  position: relative;
+  top: 2px;
 }
 .MainMenu li{
+  margin-right: 20px;
   display: inline-block;
   padding: 22px 10px;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 30px;
   color: #FAFAFA;
   border-bottom: solid 4px #1e1e20;
@@ -73,11 +81,11 @@ a {
 
 .Logo{
   display: inline-block;
-  width: 200px;
+  width: 180px;
   float: left;
   margin-left: 21px;
   position: relative;
-  bottom: 5px;
+  margin-right: 42px;
 }
 .Logo img{
   width: 100%;
@@ -134,7 +142,7 @@ a {
 }
 
 .MainImageField{
-  width: 90%;
+  width: 85%;
   height: 500px;
   margin: auto;
   padding: 0 18px;
@@ -250,7 +258,7 @@ img{
   margin: auto;
 }
 #parallex-upper-text{
-  width: 100%;
+  width: 450px;
   margin: auto;
   text-align: center;
   position: relative;
@@ -280,14 +288,16 @@ img{
   font-size: 25px;
   line-height: 37px;
   text-align: center;
+  width: 600px;
+  margin: auto;
 }
 #chart{
-  width: 70%;
+  width: 60%;
   float: right;
   height: 100%;
 }
 #chart-text{
-  width: 29%;
+  width: 39%;
   height: 100%;
   float: left;
 }
@@ -644,8 +654,7 @@ svg{
   height: 150px;
   border-radius: 100%;
   background: linear-gradient(#F9136B, #6325B0);
-  display: inline-block;
-  margin-left: 22px;
+  margin: auto;
   margin-top: 20px;
 }
 #profile-image-circle{
@@ -659,7 +668,7 @@ svg{
   left: 2px;
 }
 #profile-left{
-  width: 238px;
+  width: 256px;
   height: 100%;
   float: left;
   border-right: 1px solid rgba(0, 0, 0, 0.5);
@@ -683,14 +692,14 @@ svg{
 }
 #member-profile-title{
   text-align: center;
-  position: relative;
-  right: 16px;
-  margin-top: 10px;
   height: 318px;
+  margin: auto;
+  margin-top: 10px;
+  width: 220px;
 }
 #left-img{
-  position: relative;
-  right: 13px;
+  width: 226px;
+  margin: auto;
 }
 .profile-divider{
   border-bottom: 1px solid rgba(249, 19, 107, 0.5);
@@ -825,4 +834,24 @@ svg{
 }
 .signInForm{
   height: 600px;
+}
+.divider-about{
+  width: 85%;
+  border-bottom: 1px solid rgba(61, 61, 61, 0.5);;
+  margin: auto;
+  margin-bottom: 116px;
+}
+.menu-item-m{
+  margin-right: 20px;
+  display: inline-block;
+  padding: 22px 10px;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 30px;
+  color: #FAFAFA;
+  border-bottom: solid 4px #1e1e20;
+}
+.menu-item-m:hover{
+  color: #f9136b;
+  border-color: #f9136b;
 }

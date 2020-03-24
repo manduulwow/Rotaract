@@ -40,7 +40,7 @@ module.exports = {
     },
     getProjects: (req, res) => {
         const club_id = req.body.club_id
-        let query = (club_id) ? "SELECT a.*,b.image_id FROM `projects` a LEFT JOIN `project_images` b ON a.`id`=b.`project_id` WHERE a.club_id=? GROUP BY a.`id`" : "SELECT a.*,b.image_id FROM `projects` a LEFT JOIN `project_images` b ON a.`id`=b.`project_id` GROUP BY a.`id`"
+        let query = (club_id) ? "SELECT a.*,MAX(b.image_id) as image_id FROM `projects` a LEFT JOIN `project_images` b ON a.`id`=b.`project_id` WHERE a.club_id=? GROUP BY a.`id`" : "SELECT a.*,b.image_id FROM `projects` a LEFT JOIN `project_images` b ON a.`id`=b.`project_id` GROUP BY a.`id`"
         db.query(query,club_id, (err, projects) => {
             if (err) {
                 console.log(err)

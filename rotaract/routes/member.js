@@ -50,7 +50,10 @@ module.exports = {
         let typeList = []
 
         types.forEach(type => {
-            typeList.push(Object.values(type))
+            let type_tmp = Object.values(type)
+            type_tmp[2] = new Date(type_tmp[2])
+            type_tmp[3] = new Date(type_tmp[3])
+            typeList.push(type_tmp)            
         })
         fs.readdir(imagePath, function (err, files) {
             if (fileName.length > 0) {

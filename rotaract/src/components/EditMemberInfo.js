@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 const MemberEditPage = (props) => {
     const classes = useStyles();
     const [member, setMember] = useState(props.location.state.member)
-    const [types, setTypes] = useState((props.location.state.types && props.location.state.types.length > 0) ? props.location.state.types : [{ member_id: member.id, member_type_id: 7, start_date: new Date, end_date: new Date }])
+    const [types, setTypes] = useState((props.location.state.types && props.location.state.types.length > 0) ? props.location.state.types : [{ member_id: member.id, member_type_id: 7, started_date: new Date, end_date: new Date }])
     const [popUpState, setPopUpState] = useState(false)
     const [imageFileUrl, setImageFileUrl] = useState()
     const [isUploaded, setIsUploaded] = useState(false)
@@ -46,7 +46,7 @@ const MemberEditPage = (props) => {
     }
     const changeStartDate = (date, index) => {
         let ar = [...types]
-        ar[index].start_date = date
+        ar[index].started_date = date
         setTypes(ar)
     }
     const changeFinishedDate = (date, index) => {
@@ -97,11 +97,12 @@ const MemberEditPage = (props) => {
         setTypes([...types, {
             member_id: member.id,
             member_type_id: 7,
-            start_date: new Date,
+            started_date: new Date,
             end_date: new Date
         }])
     }
     const handleOnClick = () => {
+        console.log(types)
         axios.post('/api/editMemberData', {
             headers: headers,
             body: {
@@ -111,6 +112,7 @@ const MemberEditPage = (props) => {
             }
         })
         .then(res => {
+            console.log(res)
             props.history.push({
                 pathname: '/memberProfile',
                 state: { 

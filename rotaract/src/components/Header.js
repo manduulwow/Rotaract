@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import Grid from '@material-ui/core/Grid';
 
 function SignInOut() {
     const isLoggedIn = useSelector(state => state.isLogged)
@@ -41,6 +42,7 @@ export default class Header extends Component {
                                 <Link to="/donate"><li>Donate</li></Link>
                             </ul>
                         </nav>
+                      
                     </div>
                     <div className="Settings-Buttons">
                         <nav>

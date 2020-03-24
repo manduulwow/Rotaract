@@ -4,7 +4,7 @@ import Transition from './function/transition';
 import AboutInfoType1 from './AboutInfoType1';
 import AboutInfoType2 from './AboutInfoType2';
 import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
-
+import Divider from '@material-ui/core/Divider';
 
 const About = (props) => {
   const [scrollHeight, setScrollHeight] = useState(0);
@@ -25,7 +25,9 @@ const About = (props) => {
               <span className="first-span">People</span> <span id="second-span">of</span> <span className="first-span">Action</span>
             </div>
             <div id="parallex-lower-text">
-              Rotary is where neighbors, friends and problem-solvers share ideas join leaders, and take action to create lasting change.
+              <div> 
+                Rotary is where neighbors, friends and problem-solvers share ideas join leaders, and take action to create lasting change.
+              </div>
             </div>
             <div id="parallex-scroll-btn" onClick={scrollMore}>
               <img src={require("../../img/about-img/Arrow.svg")}></img>
@@ -49,6 +51,7 @@ const About = (props) => {
           <Tree clubName={props.clubName} />
         </div>
       </div>
+      <div className="divider-about"></div>
       <div id="about-info-container">
         <AboutInfoType1></AboutInfoType1>
         <AboutInfoType2></AboutInfoType2>

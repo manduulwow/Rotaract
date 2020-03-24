@@ -26,26 +26,27 @@ export default class App extends Component {
     return (
       <div>
         <Header />
-      
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/home" component={Home} />
-          <Route path="/about" component={Home} />
-          <Route path="/clubs" component={ClubPage} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/secret" component={withAuth(Secret)} />
-          <Route path="/login" render={(props) => <Login {...props} isAuthed={true} />} />
-          <Route path="/signin" render={(props) => <SignIn {...props} isAuthed={true} />} />
-          <Route path="/uploadExcel" component={withAuth(UploadExcel)} />
-          <Route path="/clubInfo" component={ClubInfo} />
-          <Route path="/projects" component={Projects} />
-          <Route path="/projectInfo" component={ProjectInfo} />
-          <Route path="/editClubInfo" component={withAuth(ClubEditPage)} />
-          <Route path="/editProjectInfo" component={withAuth(EditProject)} />
-          <Route path="/members" component={Members} />
-          <Route path="/memberProfile" component={Profile} />
-          <Route path="/editMemberInfo" component={MemberEditPage} />
-        </Switch>
+        <div id="body-container">
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/home" component={Home} />
+            <Route path="/about" component={Home} />
+            <Route path="/clubs" component={ClubPage} />
+            <Route path="/signup" component={SignUp} />
+            <Route path="/secret" component={withAuth(Secret)} />
+            <Route path="/login" render={(props) => <Login {...props} isAuthed={true} />} />
+            <Route path="/signin" render={(props) => <SignIn {...props} isAuthed={true} />} />
+            <Route path="/uploadExcel" component={withAuth(UploadExcel)} />
+            <Route path="/clubInfo" component={ClubInfo} />
+            <Route path="/projects" component={Projects} />
+            <Route path="/projectInfo" component={ProjectInfo} />
+            <Route path="/editClubInfo" component={withAuth(ClubEditPage)} />
+            <Route path="/editProjectInfo" component={withAuth(EditProject)} />
+            <Route path="/members" component={Members} />
+            <Route path="/memberProfile" component={Profile} />
+            <Route path="/editMemberInfo" component={MemberEditPage} />
+          </Switch>
+        </div>
         <Footer />
       </div>
     );

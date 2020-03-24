@@ -31,6 +31,7 @@ const MemberType = (props) => {
     const changeStartDate = props.changeStartDate
     const changeFinishedDate = props.changeFinishedDate
     const handleTypeChange = props.handleTypeChange
+    // new Date((date.getMonth()+1)+'/'+date.getDate()+'/'+date.getFullYear())
     const handleStartedDateChange = (date,index) => {
         changeStartDate(date,index)
     }
@@ -43,8 +44,6 @@ const MemberType = (props) => {
     const typeChange = (event,index) => {
         handleTypeChange(event.target.value,index)
     }
-
-    console.log(props.list)
 
     return (
         <div>
@@ -75,7 +74,7 @@ const MemberType = (props) => {
                                 id="date-picker-dialog"
                                 format="MM/dd/yyyy"
                                 label="Started Date"
-                                value={obj.start_date}
+                                value={obj.started_date}
                                 onChange={(e) => handleStartedDateChange(e,index)}
                                 KeyboardButtonProps={{
                                     'aria-label': 'change date',

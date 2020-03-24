@@ -3,7 +3,6 @@ import Card from './function/materialDesignCard';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 
 
 const headers = {
@@ -18,6 +17,7 @@ const Projects = (props) => {
             club_id: clubId
         })
             .then(res => {
+                console.log(res)
                 setprojects(res.data)
             }).catch(error => {
                 console.log(error)
