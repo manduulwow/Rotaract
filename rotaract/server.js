@@ -159,7 +159,6 @@ function GetClubIdFromToken(req) {
 }
 
 app.get('/api/getUserClubData', withAuth, function (req, res) {
-    console.log(req.body)
     const club_id = GetClubIdFromToken(req)
     getUserClubData(req, res, club_id)
 })

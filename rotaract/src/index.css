@@ -31,9 +31,6 @@ code {
     monospace;
 }
 .MainMenu{
-  text-align: center;
-  margin: auto;
-  width: 886px;
   position: relative;
   top: 2px;
 }
@@ -59,14 +56,53 @@ a {
   text-decoration: none;
   color: inherit;
 }
-
+#mainMenu-container{
+  display: inline-block;
+}
 .Settings-Buttons{
-  /* left: calc(100% - 300px); */
-  /* display: inline-block; */
-  /* position: relative; */
   cursor: pointer;
   width: 160px;
   float: right;
+}
+#header-container{
+  width: 90%;
+  margin: auto;
+  position: relative;
+  top: 5px;
+}
+.Logo{
+  display: inline-block;
+  width: 180px;
+  float: left;
+  position: relative;
+  margin-right: 2%;
+}
+@media only screen and (max-width: 1386px) {
+  .Settings-Buttons{
+    display: none;
+  }
+  .MainMenu ul{
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap;
+  }
+  #mainMenu-container{
+    display: block ;
+  }
+  #header-container{
+    width: 90%;
+  }
+  .Logo{
+    margin-right: 0;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  #header-container{
+    width: 100%;
+  }
+  .Logo{
+    margin-right: 0;
+  }
 }
 .Settings-Buttons ul{
   margin-top: 8px;
@@ -79,14 +115,6 @@ a {
   text-transform: uppercase;
 }
 
-.Logo{
-  display: inline-block;
-  width: 180px;
-  float: left;
-  margin-left: 21px;
-  position: relative;
-  margin-right: 42px;
-}
 .Logo img{
   width: 100%;
   height: 100%;
@@ -227,18 +255,9 @@ img{
   width: 100%;
   height: 100%;
 }
-#mainMenu-container{
-  display: inline-block;
-}
 #Header{
   background-color: #1e1e20;
   height: 85px;
-}
-#header-container{
-  width: 90%;
-  margin: auto;
-  position: relative;
-  top: 5px;
 }
 #about-image-container{
   height: calc(100vh - 85px);

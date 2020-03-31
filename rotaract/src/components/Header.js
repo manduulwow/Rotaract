@@ -42,7 +42,43 @@ export default class Header extends Component {
                                 <Link to="/donate"><li>Donate</li></Link>
                             </ul>
                         </nav>
-                      
+                        {/* <Grid container spacing={1}>
+                            <Grid container item xs={3} spacing={3}>
+                                <Link to="/about">
+                                    <div className="menu-item-m">About</div>
+                                </Link>
+                            </Grid>
+                            <Grid container item xs={3} spacing={3}>
+                                <Link to="/about">
+                                    <div className="menu-item-m">Clubs</div>
+                                </Link>
+                            </Grid>
+                            <Grid container item xs={3} spacing={3}>
+                                <Link to="/about">
+                                    <div className="menu-item-m">Projects</div>
+                                </Link>
+                            </Grid>
+                            <Grid container item xs={3} spacing={3}>
+                                <Link to="/about">
+                                    <div className="menu-item-m">Event</div>
+                                </Link>
+                            </Grid>
+                            <Grid container item xs={3} spacing={3}>
+                                <Link to="/about">
+                                    <div className="menu-item-m">Calendar</div>
+                                </Link>
+                            </Grid>
+                            <Grid container item xs={3} spacing={3}>
+                                <Link to="/about">
+                                    <div className="menu-item-m">Contact</div>
+                                </Link>
+                            </Grid>
+                            <Grid container item xs={3} spacing={3}>
+                                <Link to="/about">
+                                    <div className="menu-item-m">Donate</div>
+                                </Link>
+                            </Grid>
+                        </Grid> */}
                     </div>
                     <div className="Settings-Buttons">
                         <nav>
