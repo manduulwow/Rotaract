@@ -77,6 +77,9 @@ a {
   position: relative;
   margin-right: 2%;
 }
+#drawer-btn{
+  display: none;
+}
 @media only screen and (max-width: 1386px) {
   .Settings-Buttons{
     display: none;
@@ -102,6 +105,31 @@ a {
   }
   .Logo{
     margin-right: 0;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  #mainMenu-container{
+    display: none;
+  }
+  .Logo{
+    margin: auto;
+    display: block;
+    float: none;
+  }
+  #drawer-btn{
+    display: block;
+    position: absolute;
+    top: 0px;
+    color: white;
+    left: calc(100vw - 6%);
+    top: 12px;
+  }
+  .MuiListItem-root{
+    text-align: center !important;
+  }
+  .MuiDrawer-paper{
+    background-color: #000000 !important;
+    color: white !important;
   }
 }
 .Settings-Buttons ul{
@@ -260,6 +288,7 @@ img{
   height: 85px;
 }
 #about-image-container{
+  max-height: 1440px;
   height: calc(100vh - 85px);
 }
 #parallax {
@@ -873,4 +902,13 @@ svg{
 .menu-item-m:hover{
   color: #f9136b;
   border-color: #f9136b;
+}
+#EmptyComponentGif{
+  background-image: url("./img/public/2.gif");
+  width: 800px;
+  height: 600px;
+  margin: auto;
+}
+#EmptyComponentWrap{
+  margin-top: 15px;
 }

@@ -34,7 +34,7 @@ module.exports = {
             use: ['style-loader', 'css-loader']
         },
         {
-            test: /\.(jpg|png|svg|ttf)$/,
+            test: /\.(jpg|png|svg|ttf|gif)$/,
             loader: 'url-loader',
             options: {
                 limit: 25000,

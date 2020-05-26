@@ -1,0 +1,6 @@
+2020-03-31T02:33:55.118Z :: TypeError: Cannot read property 'split' of undefined 
+2020-03-31T02:33:58.560Z :: TypeError: Cannot read property 'split' of undefined 
+2020-03-31T02:33:58.853Z :: TypeError: Cannot read property 'split' of undefined 
+2020-03-31T02:33:58.960Z :: TypeError: Cannot read property 'split' of undefined 
+2020-03-31T02:42:45.816Z :: TypeError: Cannot read property 'length' of undefined 
+2020-03-31T02:44:38.867Z :: TypeError: Cannot read property 'length' of undefined saveMember() 
