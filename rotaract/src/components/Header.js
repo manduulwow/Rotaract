@@ -67,7 +67,7 @@ const Header = () => {
                     { text: 'About', link: '/about' }, { text: 'Clubs', link: '/clubs' }, { text: 'Projects', link: '/projects' },
                     { text: 'Event', link: '/emptyComponent' }, { text: 'International', link: '/emptyComponent' }, { text: 'Calendar', link: '/emptyComponent' },
                     { text: 'Contact', link: '/emptyComponent' }, { text: 'Donate', link: '/emptyComponent' }].map((menu, index) => (
-                        <Link to={menu.link}>
+                        <Link to={menu.link} key={index}>
                             <ListItem button key={menu.text}>
                                 <ListItemText primary={menu.text} />
                             </ListItem>

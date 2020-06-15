@@ -98,6 +98,14 @@ a {
   .Logo{
     margin-right: 0;
   }
+  #profileinfo-container-new{
+    width: 80% !important;
+  }
+}
+@media only screen and (max-width: 1281px) {
+  #profileinfo-container-new{
+    width: 100% !important;
+  }
 }
 @media only screen and (max-width: 1200px) {
   #header-container{
@@ -105,6 +113,12 @@ a {
   }
   .Logo{
     margin-right: 0;
+  }
+  #profileinfo-container-new{
+    width: 100% !important;
+  }
+  #slide-title-line{
+    width: 49% !important;
   }
 }
 @media only screen and (max-width: 1024px) {
@@ -130,6 +144,9 @@ a {
   .MuiDrawer-paper{
     background-color: #000000 !important;
     color: white !important;
+  }
+  #slide-title-line{
+    width: 45% !important;
   }
 }
 .Settings-Buttons ul{
@@ -523,6 +540,8 @@ svg{
   max-width: 1283px;
   white-space: normal;
   font-family: popMedium;
+  padding-bottom: 55px;
+  padding-left: 25px;
 }
 .member-card{
   width: 280.78px;
@@ -539,10 +558,10 @@ svg{
   transform: scale(1.05);
 }
 .card-firstColumn{
-  margin-left: 25.13px;
+  /* margin-left: 25.13px; */
 }
 .card-lastRow{
-  margin-bottom: 26px;
+  /* margin-bottom: 26px; */
 }
 .member-card .left{
   width: 60.71px;
@@ -582,7 +601,7 @@ svg{
   transform: translateX(74vw);
 }
 .box-wrapper{
-  height: 510px;
+  /* height: 510px; */
   margin-bottom: 50px;
 }
 
@@ -590,12 +609,12 @@ svg{
   font-weight: 500;
   font-size: 30px;
   line-height: 75px;
-  width: 1283px;
+  width: 1285px;
   margin: auto;
   font-family: popMedium;
 }
 #slide-title-line{
-  width: 867px;
+  width: 66%;
   display: inline-block;
   border-bottom: 1px solid #F9136B;
   position: relative;
@@ -645,16 +664,17 @@ svg{
   color: #000000;
 }
 #member-info-field{
-  width: 600px;
+  /* width: 600px; */
   margin-top: 32px;
 }
 #member-field-container{
   height: 100%;
+  width: calc(100% - 75px);
   overflow-y: auto;
   padding: 0 24px 0 24px;
 }
 .member-list-item{
-  width: 600px;
+  /* width: 600px; */
   height: 70px;
   background: #FFFFFF;
   box-shadow: 0px 4px 40px rgba(103, 103, 103, 0.1);
@@ -724,7 +744,7 @@ svg{
 #profile-right{
   height: 100%;
   float: right;
-  width: 692px;
+  width: 70%;
 }
 .profile-name{
   font-weight: 500;
@@ -911,4 +931,18 @@ svg{
 }
 #EmptyComponentWrap{
   margin-top: 15px;
+}
+#avatar-skeleton{
+  position: relative;
+  left: 3px;
+  bottom: 1px;
+}
+.loading{
+  width: 100%;
+  height: 100%;
+  background-image: url("./img/public/loading.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  min-width: 200px;
+  min-height: 400px;
 }

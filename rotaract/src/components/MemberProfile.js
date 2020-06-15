@@ -1,33 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
+import Skeleton from 'react-loading-skeleton';
 import { Link } from 'react-router-dom';
-import EditButton from './function/MaterialDesignEdit';
-import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import StarIcon from '@material-ui/icons/Star';
-import Divider from '@material-ui/core/Divider';
-import { Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+import { animateScroll as scroll } from 'react-scroll';
 import { useSelector, useDispatch } from 'react-redux';
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        width: '100%',
-        maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
-    },
-}));
 
 const headers = {
     "Accept": "application/json"
 }
 
 const Members = (props) => {
-    const classes = useStyles();
-
     const dispatch = useDispatch()
     const isLogged = useSelector(state => state.isLogged)
     const [member, setMember] = useState({});
@@ -58,6 +41,7 @@ const Members = (props) => {
             memberId: memberId
         })
             .then(res => {
+                console.log(res.data.data[0])
                 setMember(res.data.data[0])
                 setTypes(res.data.types)
             }).catch(error => {
@@ -80,12 +64,19 @@ const Members = (props) => {
                 <div id="profileinfo-container-new">
                     <div id="profile-left">
                         <div className="profile-img-container">
-                            <div id="profile-image-circle">
-                                <img src={(typeof member.image_id == "undefined" || member.image_id == 0) ? require('../../img/club-member-img/default.jpg') : window.location.origin + "/api/getImage?imageId=" + member.image_id}></img>
-                            </div>
+                            {
+                                (member.image_id) ?
+                                    <div id="profile-image-circle">
+                                        <img src={(typeof member.image_id == "undefined" || member.image_id == 0) ? require('../../img/club-member-img/default.jpg') : window.location.origin + "/api/getImage?imageId=" + member.image_id}></img>
+                                    </div>
+                                    :
+                                    <div id="avatar-skeleton">
+                                        <Skeleton circle={true} height={144} width={144} />
+                                    </div>
+                            }
                         </div>
                         <div id="member-profile-title">
-                            <span className="profile-name">{member.first_name + " " + member.last_name}</span>
+                            <span className="profile-name">{(member.first_name) ? member.first_name + " " + member.last_name : <Skeleton width={100}/>}</span>
                             <div className="profile-tag">{(types[0]) ? memberType[types[0].member_type_id] : ''} - {(member.member_id) ? member.member_id : ''}</div>
                             <div className="profile-divider"></div>
                             <div>
@@ -102,7 +93,7 @@ const Members = (props) => {
                         </div>
                         <div id="left-img">
                             <svg width="229" height="100" viewBox="0 0 229 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0)">
+                                <g clipPath="url(#clip0)">
                                     <path opacity="0.4" d="M7.56129 37.7263C10.2297 37.7263 12.3929 35.5608 12.3929 32.8896C12.3929 30.2184 10.2297 28.053 7.56129 28.053C4.8929 28.053 2.72974 30.2184 2.72974 32.8896C2.72974 35.5608 4.8929 37.7263 7.56129 37.7263Z" fill="#EF328D" />
                                     <path opacity="0.4" d="M159.611 39.1392C163.415 39.1392 166.499 36.0523 166.499 32.2444C166.499 28.4365 163.415 25.3496 159.611 25.3496C155.808 25.3496 152.724 28.4365 152.724 32.2444C152.724 36.0523 155.808 39.1392 159.611 39.1392Z" fill="#EF328D" />
                                     <path opacity="0.4" d="M146.864 40.3741C149.533 40.3741 151.696 38.2086 151.696 35.5374C151.696 32.8662 149.533 30.7008 146.864 30.7008C144.196 30.7008 142.033 32.8662 142.033 35.5374C142.033 38.2086 144.196 40.3741 146.864 40.3741Z" fill="#EF328D" />
@@ -161,12 +152,12 @@ const Members = (props) => {
                         <div id="member-field-container">
                             <div id="member-info-field">
                                 {
-                                    types.map((e,index) => (
+                                    types.map((e, index) => (
                                         <div className="member-list-item" key={index}>
                                             <div className="member-list-item-wrap">
                                                 <div className="member-list-item-dot"></div>
                                                 <div className="member-list-item-mtype">{memberType[e.member_type_id]}</div>
-                                                <div className="member-list-item-date">{e.started_date.substring(0, 10).replace('-','.').replace('-','.') + ' - ' + e.end_date.substring(0, 10).replace('-','.').replace('-','.')}</div>
+                                                <div className="member-list-item-date">{e.started_date.substring(0, 10).replace('-', '.').replace('-', '.') + ' - ' + e.end_date.substring(0, 10).replace('-', '.').replace('-', '.')}</div>
                                             </div>
                                         </div>
                                     ))

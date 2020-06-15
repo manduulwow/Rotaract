@@ -29,8 +29,6 @@ const BoardMemberSlider = (props) => {
             club_id: props.clubId
         })
             .then(res => {
-                // console.log('res')
-                // console.log(res)
                 setData(res.data.data)
             }).catch(error => {
                 console.log(error)
@@ -74,10 +72,10 @@ const BoardMemberSlider = (props) => {
                         memberId: (data[j]) ? data[j].id : 0,
                         club_id: props.clubId
                     }
-                }}>
-                    <div className="board-card" key={j}>
+                }} key={j}>
+                    <div className="board-card">
                         <div className="board-tag">
-                            <div class="board-tag-text">{memberType[data[j].member_type_id]}</div>
+                            <div className="board-tag-text">{memberType[data[j].member_type_id]}</div>
                         </div>
                         <div className="board-image">
                             <img src={(data[j].image_id > 0) ? window.location.origin + "/api/getImage?imageId=" + data[j].image_id : require('../../img/club-member-img/default.jpg')}></img>
@@ -102,10 +100,10 @@ const BoardMemberSlider = (props) => {
                     memberId: (data[i]) ? data[i].id : 0,
                     club_id: props.clubId
                 }
-            }}>
-                <div className="board-card" key={i}>
+            }} key={i}>
+                <div className="board-card">
                     <div className="board-tag">
-                        <div class="board-tag-text">{memberType[data[i].member_type_id]}</div>
+                        <div className="board-tag-text">{memberType[data[i].member_type_id]}</div>
                     </div>
                     <div className="board-image">
                         <img src={(data[i].image_id > 0) ? window.location.origin + "/api/getImage?imageId=" + data[i].image_id : require('../../img/club-member-img/default.jpg')}></img>
@@ -132,7 +130,7 @@ const BoardMemberSlider = (props) => {
             </div>
             <div id="slide-title-section">
                 <span style={{ marginLeft: "46px" }}>Board members</span>
-                <div id="slide-title-line" class="board-line"></div>
+                <div id="slide-title-line" className="board-line"></div>
             </div>
             <div id="slider-wrapper" style={{ transform: 'translateX(' + slidePos + '%)' }}>
                 {

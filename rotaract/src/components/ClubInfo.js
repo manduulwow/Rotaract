@@ -1,13 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import PaperSheet from './function/ClubPaper'
+import React, { useState, useEffect, Suspense, lazy } from 'react';
+import Paper from '@material-ui/core/Paper';
 import EditButton from './function/MaterialDesignEdit'
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
+import Skeleton from 'react-loading-skeleton';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import Slider from './Slider'
-import BoardMemberSlider from './BoardMemberSlider'
+// import Slider from './Slider'
+// import BoardMemberSlider from './BoardMemberSlider'
+
+const Slider = lazy(() => import('./Slider'))
+const BoardMemberSlider = lazy(() => import('./BoardMemberSlider'))
+
+
+
 import { Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 
 
@@ -49,15 +56,17 @@ const ClubInformation = (props) => {
         <div>
             <Container fixed>
                 <div className="MainImageField">
-                    <img src={image} className="about-img" />
+                    {
+                        (clubData[0]) ? <img src={image} className="about-img" /> : <Skeleton height={500} />
+                    }
                 </div>
                 <div className="club-paper">
                     <Link to={{ pathname: "/projects", state: { club_id: props.location.state.club_id } }}>
-                        <PaperSheet PaperTitle={"Projects"} />
+                        <Paper>Projects</Paper>
                     </Link>
                 </div>
                 <div className="club-info-text">
-                    <div className="">
+                    <div>
                         <Link to={{
                             pathname: "/editClubInfo", state: {
                                 club_id: props.location.state.club_id,
@@ -70,28 +79,47 @@ const ClubInformation = (props) => {
                             {(isLogged && props.location.state.club_id == clubId) ? <EditButton /> : ""}
                         </Link>
                     </div>
-                    <div className="">
-                        <Typography gutterBottom variant="h5" component="h2">
-                            {name}
-                        </Typography>
+                    <div>
+                        {
+                            (clubData[0]) ?
+                                <Typography gutterBottom variant="h5" component="h2">
+                                    {name}
+                                </Typography>
+                                :
+                                <Skeleton width={200} />
+                        }
                     </div>
                     <div className="charterDate">
-                        <Typography variant="subtitle1" color="textSecondary" component="p">
-                            Charter date: {charterDate.substring(0, 10)}
-                        </Typography>
+                        {
+                            (clubData[0]) ?
+                                <Typography variant="subtitle1" color="textSecondary" component="p">
+                                    Charter date: {charterDate.substring(0, 10)}
+                                </Typography>
+                                :
+                                <Skeleton width={200} />
+                        }
                     </div>
                     <div className="">
-                        <Typography gutterBottom variant="subtitle1" component="p">
-                            {introduction}
-                        </Typography>
+                        {
+                            (clubData[0]) ?
+                                <Typography gutterBottom variant="subtitle1" component="p">
+                                    {introduction}
+                                </Typography>
+                                :
+                                <Skeleton />
+                        }
                     </div>
                 </div>
             </Container>
             <div className="box-wrapper" >
-                <Slider clubId={props.location.state.club_id}></Slider>
+                <Suspense fallback={<div className="loading"></div>}>
+                    <Slider clubId={props.location.state.club_id}></Slider>
+                </Suspense>
             </div>
-            <div className="box-wrapper board-wrapper" >
-                <BoardMemberSlider clubId={props.location.state.club_id}></BoardMemberSlider>
+            <div className="box-wrapper board-wrapper">
+                <Suspense fallback={<div className="loading"></div>}>
+                    <BoardMemberSlider clubId={props.location.state.club_id}></BoardMemberSlider>
+                </Suspense>
             </div>
         </div>
     )

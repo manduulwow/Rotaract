@@ -62,8 +62,8 @@ const Slider = (props) => {
                         memberId: (data[j]) ? data[j].id : 0,
                         club_id: props.clubId
                     }
-                }}>
-                    <div className={((j >= i + 8) ? "card-lastRow" : "") + " member-card " + ((j % 4 == 0) ? "card-firstColumn" : "")} key={j}>
+                }} key={j}>
+                    <div className={((j >= i + 8) ? "card-lastRow" : "") + " member-card " + ((j % 4 == 0) ? "card-firstColumn" : "")}>
                         <div className="left">
                             <img src={(data[j].image_id > 0) ? window.location.origin + "/api/getImage?imageId=" + data[j].image_id : require('../../img/club-member-img/default.jpg')}></img>
                         </div>
@@ -71,7 +71,6 @@ const Slider = (props) => {
                             <div className="member-name">{(data[j] && data[j].last_name) ? data[j].last_name.substr(0,1)+". "+data[j].first_name : "Empty"}</div>
                             <div className="member-date">Joined on {(data[j] && data[j].joined_date) ? data[j].joined_date.substr(0, 10) : ""}</div>
                         </div>
-
                     </div>
                 </Link>
             cards.push(card)
@@ -89,8 +88,8 @@ const Slider = (props) => {
                     memberId: (data[i]) ? data[i].id : 0,
                     club_id: props.clubId
                 }
-            }}>
-                <div className={((count >= 8) ? "card-lastRow" : "") + " member-card " + ((i % 4 == 0) ? "card-firstColumn" : "")} key={i}>
+            }} key={i}>
+                <div className={((count >= 8) ? "card-lastRow" : "") + " member-card " + ((i % 4 == 0) ? "card-firstColumn" : "")}>
                     <div className="left">
                         <img src={(data[i].image_id > 0) ? window.location.origin + "/api/getImage?imageId=" + data[i].image_id : require('../../img/club-member-img/default.jpg')}></img>
                     </div>
