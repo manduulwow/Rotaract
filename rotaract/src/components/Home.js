@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import About from './About';
+import About from './About/About';
 import axios from 'axios';
 import { useDispatch } from 'react-redux'
 
