@@ -30,10 +30,9 @@ module.exports = {
             }
         },
         {
-            test: /\.s[ac]ss$/i,
+            test: /\.s?css$/i,
             use: ['style-loader', 'css-loader','sass-loader']
         },
-
         {
             test: /\.(jpg|png|svg|ttf|gif)$/,
             loader: 'url-loader',
