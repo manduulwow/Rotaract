@@ -1,0 +1,47 @@
+$header_font_color: #0632AD;
+$paragraph_font_color: #6B6B6B;
+
+.about__view__1 {
+    width: 100vw;
+    height: calc(100vh - 85px);
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    overflow: visible;
+    font-size: 10pt;
+
+    .view__1__left,
+    .view__1__right {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: visible;
+    }
+
+    .view__1__left {
+        grid-column: 2/8;
+        transform: translateY(-70px);
+
+        h1{
+            margin: 0;
+            font-size: 3rem;
+            color: $header_font_color;
+            font-weight: 200;
+        }
+        
+        p{
+            font-size: 1rem;
+            color: $paragraph_font_color;
+        }
+    }
+
+    .view__1__right {
+        grid-column: 9/17;
+
+        img{
+            object-fit: contain;
+            width: 550px;
+            height: 550px;
+        }
+
+    }
+}
