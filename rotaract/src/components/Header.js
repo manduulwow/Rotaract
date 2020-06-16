@@ -37,7 +37,7 @@ function SignInOut() {
             })
     }
     if (isLoggedIn) {
-        return <li onClick={onClick}>Logout</li>;
+        return <li onClick={onClick}><a>Logout</a></li>;
     }
     return <li><Link to="/signin">Login</Link></li>;
 }
@@ -82,31 +82,33 @@ const Header = () => {
             <div id="header-container">
                 <div className="Logo">
                     <Link to="/">
-                        <img src={require('../../img/logo.png')}></img>
+                        <img src={require('../../img/Logo.svg')}></img>
                     </Link>
                 </div>
-                <div id="mainMenu-container">
-                    <nav className="MainMenu">
-                        <ul>
-                            <Link to="/about"><li>About</li></Link>
-                            <Link to="/clubs"><li>Clubs</li></Link>
-                            <Link to="/projects"><li>Projects</li></Link>
-                            <Link to="/emptyComponent"><li>Event</li></Link>
+                <div className="menu-container">
+                    <div id="mainMenu-container">
+                        <nav className="MainMenu">
+                            <ul>
+                                <Link to="/about"><li><span>Home</span></li></Link>
+                                <Link to="/clubs"><li><span>Clubs</span></li></Link>
+                                <Link to="/projects"><li><span>Projects</span></li></Link>
+                                {/* <Link to="/emptyComponent"><li>Event</li></Link>
                             <Link to="/emptyComponent"><li>International</li></Link>
                             <Link to="/emptyComponent"><li>Calendar</li></Link>
                             <Link to="/emptyComponent"><li>Contact</li></Link>
-                            <Link to="/emptyComponent"><li>Donate</li></Link>
-                        </ul>
-                    </nav>
-                </div>
-                <div className="Settings-Buttons">
-                    <nav>
-                        <ul>
-                            {/* <li><Link to="/signup">Sign Up</Link></li> */}
-                            <li><Link to="/secret">Enter Data</Link></li>
-                            <SignInOut isLoggedIn={false} />
-                        </ul>
-                    </nav>
+                            <Link to="/emptyComponent"><li>Donate</li></Link> */}
+                            </ul>
+                        </nav>
+                    </div>
+                    <div className="Settings-Buttons">
+                        <nav>
+                            <ul>
+                                {/* <li><Link to="/signup">Sign Up</Link></li> */}
+                                <li><Link to="/secret">Enter Data</Link></li>
+                                <SignInOut isLoggedIn={false} />
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
                 <div id="drawer-btn">
                     <IconButton

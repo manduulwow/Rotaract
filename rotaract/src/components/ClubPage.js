@@ -26,7 +26,7 @@ const ClubPage = (props) => {
   return (
     <Container fixed>
       {clubData.map((data, index) => (
-        <div key={index} className="club-paper" id={data.id}>
+        <div key={index} className="club-paper club-paper-float" id={data.id}>
           <Link to={{ pathname: "/clubInfo", state: { club_id: data.id, all : false } }}>
             <PaperSheet PaperTitle={"Rotaract Club of " + data.name} Introduction={data.introduction} Image={require('../../img/club-paper-img/2.png')} />
           </Link>

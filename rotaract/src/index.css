@@ -12,13 +12,9 @@
 }
 body {
   margin: 0;
-  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
-  font-family: popRegular;
+  font-family: popRegular !important;
   font-style: normal;
+  letter-spacing: normal !important;
 }
 ul{
   padding: 0;
@@ -34,20 +30,21 @@ code {
   position: relative;
   top: 2px;
 }
+
 .MainMenu li{
-  margin-right: 20px;
+  margin-right: 35px;
   display: inline-block;
   padding: 22px 10px;
+  font-style: normal;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 30px;
-  color: #FAFAFA;
-  border-bottom: solid 4px #1e1e20;
 }
-.MainMenu li:hover{
-  color: #f9136b;
-  border-color: #f9136b;
+
+.MainMenu li:hover span{
+  border-bottom: solid 1px;
 }
+
 ul{
   list-style-type: none;
   margin: 0;
@@ -61,8 +58,9 @@ a {
 }
 .Settings-Buttons{
   cursor: pointer;
-  width: 160px;
-  float: right;
+  display: inline-block;
+  position: relative;
+  top: 2px;
 }
 #header-container{
   width: 90%;
@@ -73,7 +71,6 @@ a {
 .Logo{
   display: inline-block;
   width: 180px;
-  float: left;
   position: relative;
   margin-right: 2%;
 }
@@ -81,19 +78,10 @@ a {
   display: none;
 }
 @media only screen and (max-width: 1386px) {
-  .Settings-Buttons{
-    display: none;
-  }
   .MainMenu ul{
     display: flex;
     justify-content: space-evenly;
     flex-flow: row wrap;
-  }
-  #mainMenu-container{
-    display: block ;
-  }
-  #header-container{
-    width: 90%;
   }
   .Logo{
     margin-right: 0;
@@ -108,12 +96,6 @@ a {
   }
 }
 @media only screen and (max-width: 1200px) {
-  #header-container{
-    width: 100%;
-  }
-  .Logo{
-    margin-right: 0;
-  }
   #profileinfo-container-new{
     width: 100% !important;
   }
@@ -122,8 +104,8 @@ a {
   }
 }
 @media only screen and (max-width: 1024px) {
-  #mainMenu-container{
-    display: none;
+  .menu-container{
+    display: none !important;
   }
   .Logo{
     margin: auto;
@@ -149,17 +131,29 @@ a {
     width: 45% !important;
   }
 }
-.Settings-Buttons ul{
-  margin-top: 8px;
-}
 .Settings-Buttons li{
   display: inline-block;
-  padding: 0px 10px;
-  font-family: 'open-sans-bold', AvenirNext-Medium, sans-serif;
-  color: white;
-  text-transform: uppercase;
+  margin-right: 35px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  color: black;
 }
 
+.Settings-Buttons li:first-child:hover a{
+  border-bottom: solid 1px;
+}
+.Settings-Buttons li:last-child {
+  border: 2px solid #E7B012;
+  border-radius: 10px 10px 10px 0px;
+}
+.Settings-Buttons li:last-child a{
+  padding: 5px 15px;
+}
+.Settings-Buttons li:last-child:hover{
+  background: linear-gradient(21.52deg, #EED99D 8.42%, #F8BF2E 91.47%);
+}
 .Logo img{
   width: 100%;
   height: 100%;
@@ -234,9 +228,14 @@ a {
   margin-bottom: 42px;
   text-align: center;
 }
-.club-paper p{
-  /* max-height: 500px; */
-  /* min-height: 400px; */
+.club-paper-float{
+  transition: ease-in 0.3s;
+  position: relative;
+  bottom: 0px;
+}
+.club-paper-float:hover{
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.25);
+  bottom: 5px;
 }
 .uploadTypeCard{
   width: 345px;
@@ -301,8 +300,9 @@ img{
   height: 100%;
 }
 #Header{
-  background-color: #1e1e20;
+  background-color: transparent;
   height: 85px;
+  margin-bottom: 60px;
 }
 #about-image-container{
   max-height: 1440px;
@@ -706,7 +706,7 @@ svg{
   margin: auto;
   background: #FFFFFF;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.25);
-  border-radius: 0px 0px 10px 10px;
+  border-radius: 10px;
 }
 .profileImage-container{
   width: 300px;
@@ -945,4 +945,11 @@ svg{
   background-position: center;
   min-width: 200px;
   min-height: 400px;
+}
+
+.menu-container{
+  float: right;
+}
+.menu-container a{
+  color: #1C1C1C !important;
 }
