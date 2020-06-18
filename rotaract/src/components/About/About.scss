@@ -1,5 +1,14 @@
-$header_font_color: #0632AD;
-$paragraph_font_color: #6B6B6B;
+$header_font_color: #0632ad;
+$paragraph_font_color: #6b6b6b;
+
+@import "../../scss//responsive.scss";
+
+@mixin flexColumnCenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: visible;
+}
 
 .about__view__1 {
     width: 100vw;
@@ -7,41 +16,103 @@ $paragraph_font_color: #6B6B6B;
     display: grid;
     grid-template-columns: repeat(16, 1fr);
     overflow: visible;
-    font-size: 10pt;
-
-    .view__1__left,
-    .view__1__right {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        overflow: visible;
-    }
+    font-size: 100%;
 
     .view__1__left {
+        @include flexColumnCenter();
         grid-column: 2/8;
         transform: translateY(-70px);
 
-        h1{
+        h1 {
             margin: 0;
-            font-size: 3rem;
+            font-size: 3em;
             color: $header_font_color;
             font-weight: 200;
         }
-        
-        p{
-            font-size: 1rem;
+
+        p {
+            font-size: 1em;
             color: $paragraph_font_color;
         }
     }
 
     .view__1__right {
+        @include flexColumnCenter();
+        align-items: center;
         grid-column: 9/17;
 
-        img{
+        img {
             object-fit: contain;
-            width: 550px;
-            height: 550px;
+            width: 700px;
+        }
+    }
+
+    @include responsive(tab-land) {
+        font-size: 100%;
+        align-items: center;
+
+        .view__1__left {
+            @include flexColumnCenter();
+            grid-column: 2/8;
+            transform: translateY(-70px);
+
+            h1 {
+                font-size: 2.5em;
+            }
         }
 
+        .view__1__right {
+            img {
+                width: 90%;
+            }
+        }
+    }
+
+    @include responsive(tab-port) {
+        height: calc(80vh - 85px);
+        font-size: 85%;
+        align-items: center;
+
+        .view__1__right {
+            img {
+                width: 90%;
+            }
+        }
+    }
+
+    @include responsive(phone) {
+        display: flex;
+        flex-flow: column;
+        margin: 60px 20px 60px 20px;
+        height: auto;
+        width: auto;
+        font-size: 55%;
+
+        .view__1__left {
+            width: 100%;
+            transform: translateY(0);
+            text-align: center;
+
+            h1{
+                font-size: 2em;
+            }
+        }
+
+        .view__1__right {
+            margin-top: 40px;
+            img {
+                width: 70%;
+            }
+        }
+    }
+
+    @include responsive(big-desktop) {
+        font-size: 16pt;
+
+        .view__1__right {
+            img {
+                width: 100%;
+            }
+        }
     }
 }
