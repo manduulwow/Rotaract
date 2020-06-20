@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react'
+import React, { Suspense, lazy, Fragment } from 'react'
 import withAuth from './withAuth'
 import Header from './components/Header'
 import Footer from './components/Footer'
