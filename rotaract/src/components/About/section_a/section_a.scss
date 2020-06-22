@@ -30,14 +30,14 @@ $paragraph_font_color: #6b6b6b;
             position: absolute;
             left: 0;
             bottom: 0;
-            transform: translateX(-40%);
+            transform: translateX(-43%);
         }
 
         .vector_right{
             position: absolute;
             right: 0;
             bottom: 0;
-            transform: translateX(40%);
+            transform: translateX(43%);
         }
 
     }
@@ -94,6 +94,7 @@ $paragraph_font_color: #6b6b6b;
 
         .about__view__1_assets{
             height: 60vh;
+            bottom: 20px;
             img{
                 object-fit: contain;
                 width: 40%;
@@ -120,6 +121,7 @@ $paragraph_font_color: #6b6b6b;
 
         .about__view__1_assets{
             height: 35vh;
+            bottom: auto;
             img{
                 object-fit: contain;
                 width: 40%;
