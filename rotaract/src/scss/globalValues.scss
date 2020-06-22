@@ -1,0 +1,9 @@
+$header_font_color: #0632ad;
+$paragraph_font_color: #6b6b6b;
+
+@mixin flexColumnCenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: visible;
+}

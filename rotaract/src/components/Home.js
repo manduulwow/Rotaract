@@ -30,6 +30,8 @@ const Home = () => {
     return () => (isSubscribed = false)
   }, [])
 
+  console.log('clubss,', clubNames);
+
   return (
     <div>
       <div>

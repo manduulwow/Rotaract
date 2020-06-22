@@ -1,22 +1,46 @@
 $header_font_color: #0632ad;
 $paragraph_font_color: #6b6b6b;
 
-@import "../../scss//responsive.scss";
-
-@mixin flexColumnCenter {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: visible;
-}
+@import "../../../scss//responsive.scss";
+@import "../../../scss//globalValues.scss";
 
 .about__view__1 {
-    // width: 100vw;
     height: calc(100vh - 85px);
     display: grid;
     grid-template-columns: repeat(16, 1fr);
     overflow: visible;
     font-size: 100%;
+
+
+    .about__view__1_assets{
+        z-index: -100;
+        height: calc(100vh - 85px);
+        width: 100vw;
+        position: absolute;
+        overflow-x: hidden;
+        transform: translateY(100px);
+
+        img{
+            object-fit: contain;
+            width: 40%;
+            height: 40%;
+        }
+
+        .vector_left{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            transform: translateX(-40%);
+        }
+
+        .vector_right{
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            transform: translateX(40%);
+        }
+
+    }
 
     .view__1__left {
         @include flexColumnCenter();
@@ -48,13 +72,14 @@ $paragraph_font_color: #6b6b6b;
     }
 
     @include responsive(tab-land) {
+        height: auto;
         font-size: 100%;
         align-items: center;
 
         .view__1__left {
             @include flexColumnCenter();
             grid-column: 2/8;
-            transform: translateY(-70px);
+            transform: translateY(0);
 
             h1 {
                 font-size: 2.5em;
@@ -66,18 +91,42 @@ $paragraph_font_color: #6b6b6b;
                 width: 90%;
             }
         }
+
+        .about__view__1_assets{
+            height: 60vh;
+            img{
+                object-fit: contain;
+                width: 40%;
+                height: 40%;
+            }
+        }
     }
 
     @include responsive(tab-port) {
-        height: calc(80vh - 85px);
+        margin-top: 85px;
+        height: auto;
         font-size: 85%;
         align-items: center;
+
+        .view__1__left{
+            transform: translateY(0);
+        }
 
         .view__1__right {
             img {
                 width: 90%;
             }
         }
+
+        .about__view__1_assets{
+            height: 35vh;
+            img{
+                object-fit: contain;
+                width: 40%;
+                height: 40%;
+            }
+        }
+
     }
 
     @include responsive(phone) {
@@ -87,6 +136,10 @@ $paragraph_font_color: #6b6b6b;
         height: auto;
         width: auto;
         font-size: 55%;
+
+        .about__view__1_assets{
+            display: none;
+        }
 
         .view__1__left {
             width: 100%;

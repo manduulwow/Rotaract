@@ -1,0 +1,100 @@
+@import "../../../scss//responsive.scss";
+@import "../../../scss//globalValues.scss";
+
+.section_c {
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    font-size: 100%;
+    height: auto;
+    align-items: center;
+
+    .section_c_left {
+        grid-column: 1/8;
+        align-items: center;
+    }
+
+    .section_c_right {
+        @include flexColumnCenter();
+        grid-column: 8/16;
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: $header_font_color;
+            font-weight: 200;
+        }
+
+        p {
+            font-size: 1em;
+            color: $paragraph_font_color;
+        }
+    }
+
+    @include responsive(tab-land) {
+        font-size: 100%;
+
+        .section_c_left {
+            img {
+                width: 90%;
+            }
+        }
+
+        .section_c_right {
+            @include flexColumnCenter();
+
+            h1 {
+                font-size: 2.5em;
+            }
+        }
+    }
+
+    @include responsive(tab-port) {
+        height: auto;
+        font-size: 85%;
+        align-items: center;
+
+        .section_c_eft {
+            img {
+                width: 90%;
+            }
+        }
+    }
+
+    @include responsive(phone) {
+        display: flex;
+        flex-flow: column;
+        margin: 0 20px 60px 20px;
+        height: auto;
+        width: auto;
+        font-size: 55%;
+
+        .section_c_left {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                width: 70%;
+            }
+        }
+
+        .section_c_right {
+            width: 100%;
+            text-align: center;
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    }
+
+    @include responsive(big-desktop) {
+        font-size: 16pt;
+
+        .section_c_left {
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
