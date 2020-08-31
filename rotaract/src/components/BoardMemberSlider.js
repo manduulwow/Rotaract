@@ -49,18 +49,6 @@ const BoardMemberSlider = (props) => {
         }
     }
 
-    const onChange = (event) => {
-        axios.post('/api/getMembersByName', {
-            headers: headers,
-            name: event.target.value
-        })
-            .then(res => {
-                setData(res.data.data)
-            }).catch(error => {
-                console.log(error)
-            });
-    }
-
     let slideBox = []
 
     for (let i = 0; i <= data.length - 3; i += 3) {

@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path')
 const { get_error_log } = require('../error_log/error_log');
 const error_log_path = "./error_log/data_api_error.txt"
-
+const { date_normalizer } = require('../normalizer/date_normalizer')
 
 module.exports = {
     saveMembers: (req, res, club_id) => {
@@ -10,8 +10,10 @@ module.exports = {
         const values = []
         try{
             for(let i = 1; i < data.length; i++) {
-                let joinedDate = (data[i][6].length > 4) ? data[i][6] : data[i][6]+'/07/01'
-                values.push([club_id,data[i][1],data[i][2],data[i][3],data[i][4],data[i][5],joinedDate])
+                if(data[i][6]) {
+                    let joinedDate = date_normalizer(data[i][6])
+                    values.push([club_id,data[i][1],data[i][2],data[i][3],data[i][4],data[i][5],joinedDate])
+                }
             }
             let query = "INSERT INTO `members`(club_id,member_id,first_name,last_name,register_num,member_type,joined_date) VALUES ?"
             db.query(query, [values], (err, response) => {
@@ -30,8 +32,12 @@ module.exports = {
         const values = []
         try{
             for(let i = 1; i < data.length; i++) {
-                const duration = data[i][10].split("-")
-    
+                let duration;
+                if(data[i][10]) {
+                    duration = (typeof data[i][10] != 'number') ? data[i][10].split("-") : [data[i][10]];
+                } else {
+                    duration = []
+                }
                 if(duration.length == 1) {
                     duration.push(duration[0])
                 }
@@ -43,7 +49,7 @@ module.exports = {
                     get_error_log(error_log_path,err+" saveProjects()")
                     return res.status(500).send(err);
                 }
-                return res.send(200);
+                return res.sendStatus(200);
             }) 
         } catch (err) {
             get_error_log(error_log_path, err+" saveProjects()")
@@ -51,7 +57,7 @@ module.exports = {
     },
     getProjects: (req, res) => {
         const club_id = req.body.club_id
-        let query = (club_id) ? "SELECT a.*,MAX(b.image_id) as image_id FROM `projects` a LEFT JOIN `project_images` b ON a.`id`=b.`project_id` WHERE a.club_id=? GROUP BY a.`id`" : "SELECT a.*,b.image_id FROM `projects` a LEFT JOIN `project_images` b ON a.`id`=b.`project_id` GROUP BY a.`id`"
+        let query = (club_id) ? "SELECT a.*,MAX(b.image_id) as image_id FROM `projects` a LEFT JOIN `project_images` b ON a.`id`=b.`project_id` WHERE a.club_id=? GROUP BY a.`id`" : "SELECT a.*,MAX(b.image_id) as image_id FROM `projects` a LEFT JOIN `project_images` b ON a.`id`=b.`project_id` GROUP BY a.`id` LIMIT 10"
         db.query(query,club_id, (err, projects) => {
             if (err) {
                 get_error_log(error_log_path,err+" getProjects()")
@@ -100,8 +106,8 @@ module.exports = {
         const aim = data.body.aim
         const overview = data.body.overView
         const numParticipants = data.body.numParticipants
-        const startedDate = new Date(data.body.startedDate)
-        const finishedDate = new Date(data.body.finishedDate)
+        const startedDate = date_normalizer(data.body.startedDate)
+        const finishedDate = date_normalizer(data.body.finishedDate)
         const fileNames = data.body.imageNames
         const projectType = data.body.projectType
 
@@ -137,7 +143,7 @@ module.exports = {
             }
 
             let query = "UPDATE projects SET name=? ,co_organizers=?,total_budget=?,fundraising=?,num_participants=?,other_participants=?,beneficaries=?,started_date=?,finished_date=?,overview=?,aim=? WHERE id=?";
-            db.query(query, [projectName,coOrganizer,totalBudget,fundraising,numParticipants,otherParticipants,beneficaries,startedDate.getFullYear()+"-"+(startedDate.getMonth()+1)+"-"+startedDate.getDate(),finishedDate.getFullYear()+"-"+(finishedDate.getMonth()+1)+"-"+finishedDate.getDate(),overview,aim,project_id], (err, response) => {
+            db.query(query, [projectName,coOrganizer,totalBudget,fundraising,numParticipants,otherParticipants,beneficaries,startedDate,finishedDate,overview,aim,project_id], (err, response) => {
                 if (err) {
                     get_error_log(error_log_path,err+" editProjectData()")
                     return res.status(500).send(err);

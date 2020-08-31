@@ -2,7 +2,8 @@ import React, { Suspense, lazy, Fragment } from 'react'
 import withAuth from './withAuth'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom';
+import Loader from './components/function/Loader'
 
 const Home = lazy(() => import('./components/Home'))
 const ClubPage = lazy(() => import('./components/ClubPage'))
@@ -19,14 +20,12 @@ const EditProject = lazy(() => import('./components/EditProjectInfo'))
 const Members = lazy(() => import('./components/Members'))
 const Profile = lazy(() => import('./components/MemberProfile'))
 const MemberEditPage = lazy(() => import('./components/EditMemberInfo'))
-const EmptyComponent = lazy(() => import('./components/EmptyComponent'))
-
 
 const App = () => (
   <div>
     <Header />
     <div id="body-container">
-      <Suspense fallback={<div className="loading"></div>}>
+      <Suspense fallback={<Loader />}>
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/home" component={Home} />
@@ -45,7 +44,6 @@ const App = () => (
           <Route path="/members" component={Members} />
           <Route path="/memberProfile" component={Profile} />
           <Route path="/editMemberInfo" component={MemberEditPage} />
-          <Route path="/emptyComponent" component={EmptyComponent} />
         </Switch>
       </Suspense>
     </div>

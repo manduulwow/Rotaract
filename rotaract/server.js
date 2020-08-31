@@ -9,7 +9,7 @@ const { getClubNames, getUserClubData, getClubData, saveClubIntro, editClubInfo 
 const { authenticate, register } = require('./routes/user');
 const { saveMembers, saveProjects, getProjects, getProjectData, editProjectData } = require('./routes/data')
 const { getImage } = require('./routes/image');
-const { getMembers, getMemberData, getMembersByName, editMemberData, getBoardMembers } = require('./routes/member');
+const { addMember, getMembers, getMemberData, getMembersByName, editMemberData, getBoardMembers } = require('./routes/member');
 
 const bodyParser = require('body-parser');
 global.jwt = require('jsonwebtoken');
@@ -189,6 +189,7 @@ app.post('/api/excelfile', withAuth, function (req, res) {
 })
 
 //data save from Excel
+
 app.post('/api/save_intro', withAuth, function (req, res) {
     const club_id = GetClubIdFromToken(req)
     saveClubIntro(req, res, club_id)
@@ -251,5 +252,7 @@ app.post('/api/memberData', getMemberData)
 app.post('/api/editMemberData', editMemberData)
 
 app.post('/api/getBoardMembers', getBoardMembers)
+
+app.post('/api/addMember', addMember)
 
 app.listen(process.env.PORT || 61001);

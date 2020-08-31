@@ -1,8 +1,9 @@
 const fs = require('fs');
 const path = require('path')
 const { get_error_log } = require('../error_log/error_log');
+const { date_normalizer } = require('../normalizer/date_normalizer')
 
-const error_log_path = "../error_log/club_api_error.txt"
+const error_log_path = "./error_log/club_api_error.txt"
 
 module.exports = {
     getClubNames: (req, res) => {
@@ -37,7 +38,7 @@ module.exports = {
     },
     saveClubIntro: (req, res, club_id) => {
         const data = req.body
-        const charterDate = data[1][1]
+        const charterDate = date_normalizer(data[1][1])
         const introductionText = data[1][2]
         let query = "UPDATE `club` SET introduction=?,charterDate=? WHERE id=?";
         db.query(query, [introductionText, charterDate, club_id], (err, response) => {
@@ -51,7 +52,7 @@ module.exports = {
     editClubInfo: (req, res, club_id) => {
         const data = req.body
         const clubId = data.body.club_id
-        const charterDate = new Date(data.body.charterDate)
+        const charterDate = date_normalizer(data.body.charterDate)
         const clubName = data.body.clubName
         const clubIntroduction = data.body.clubIntroduction
         const fileNames = data.body.fileNames
@@ -72,7 +73,7 @@ module.exports = {
                                     return res.status(500).send(err);
                                 }
                                 let query = "UPDATE `club` SET name=?,introduction=?,charterDate=?,club_page_img_id=? WHERE id=?";
-                                db.query(query, [clubName,clubIntroduction, charterDate.getFullYear()+"-"+(charterDate.getMonth()+1)+"-"+charterDate.getDate(), result.insertId, clubId], (err, response) => {
+                                db.query(query, [clubName,clubIntroduction, charterDate, result.insertId, clubId], (err, response) => {
                                     if (err) {
                                         get_error_log(error_log_path,err)
                                         return res.status(500).send(err);

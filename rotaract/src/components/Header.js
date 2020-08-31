@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-
-
+import SettingButtons from './function/UserStatus'
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
@@ -26,21 +19,6 @@ const useStyles = makeStyles({
     },
 });
 
-function SignInOut() {
-    const isLoggedIn = useSelector(state => state.isLogged)
-    const dispatch = useDispatch()
-    const onClick = () => {
-        fetch('/api/signOut')
-            .then(res => {
-                if (res.status === 200)
-                    dispatch({ type: 'SIGNOUT' })
-            })
-    }
-    if (isLoggedIn) {
-        return <li onClick={onClick}><a>Logout</a></li>;
-    }
-    return <li><Link to="/signin">Login</Link></li>;
-}
 
 const Header = () => {
     const classes = useStyles();
@@ -82,7 +60,7 @@ const Header = () => {
             <div id="header-container">
                 <div className="Logo">
                     <Link to="/">
-                        <img src={require('../../img/Logo.svg')}></img>
+                        <img src={require('../img/public/rotaract_logo.png')}></img>
                     </Link>
                 </div>
                 <div className="menu-container">
@@ -100,15 +78,7 @@ const Header = () => {
                             </ul>
                         </nav>
                     </div>
-                    <div className="Settings-Buttons">
-                        <nav>
-                            <ul>
-                                {/* <li><Link to="/signup">Sign Up</Link></li> */}
-                                <li><Link to="/secret">Enter Data</Link></li>
-                                <SignInOut isLoggedIn={false} />
-                            </ul>
-                        </nav>
-                    </div>
+                    <SettingButtons />
                 </div>
                 <div id="drawer-btn">
                     <IconButton

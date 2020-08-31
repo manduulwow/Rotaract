@@ -8,13 +8,12 @@ const headers = {
   "Accept": "application/json"
 }
 
-const ClubPage = (props) => {
+const ClubPage = () => {
   useEffect(() => {
     axios.get('/api/getClubData', {
       headers: headers
     })
       .then(res => {
-        console.log(res.data)
         setclubData(res.data.data)
       }).catch(error => {
         console.log(error)

@@ -7,15 +7,13 @@ import axios from 'axios';
 import Skeleton from 'react-loading-skeleton';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-// import Slider from './Slider'
-// import BoardMemberSlider from './BoardMemberSlider'
 
 const Slider = lazy(() => import('./Slider'))
 const BoardMemberSlider = lazy(() => import('./BoardMemberSlider'))
 
 
 
-import { Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+import { animateScroll as scroll } from 'react-scroll';
 
 
 const headers = {
@@ -50,7 +48,7 @@ const ClubInformation = (props) => {
 
     const name = (clubData[0]) ? clubData[0].name : "Not given"
     const introduction = (clubData[0]) ? clubData[0].introduction : "Not given"
-    const charterDate = (clubData[0]) ? clubData[0].charterDate : "Not given"
+    const charterDate = (clubData[0] && clubData[0].charterDate) ? clubData[0].charterDate.substring(0, 10) : "Not given"
     let image = (clubData[0] && clubData[0].id) ? window.location.origin + "/api/getImage?imageId=" + clubData[0].id : require('../../img/club-info-img/5.jpg')
     return (
         <div>
@@ -71,7 +69,7 @@ const ClubInformation = (props) => {
                             pathname: "/editClubInfo", state: {
                                 club_id: props.location.state.club_id,
                                 club_name: name,
-                                charter_date: charterDate.substring(0, 10),
+                                charter_date: charterDate,
                                 introduction: introduction,
                                 image: image
                             }
@@ -93,7 +91,7 @@ const ClubInformation = (props) => {
                         {
                             (clubData[0]) ?
                                 <Typography variant="subtitle1" color="textSecondary" component="p">
-                                    Charter date: {charterDate.substring(0, 10)}
+                                    Charter date: {charterDate}
                                 </Typography>
                                 :
                                 <Skeleton width={200} />

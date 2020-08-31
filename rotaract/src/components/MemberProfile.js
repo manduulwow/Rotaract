@@ -41,7 +41,6 @@ const Members = (props) => {
             memberId: memberId
         })
             .then(res => {
-                console.log(res.data.data[0])
                 setMember(res.data.data[0])
                 setTypes(res.data.types)
             }).catch(error => {
@@ -76,7 +75,7 @@ const Members = (props) => {
                             }
                         </div>
                         <div id="member-profile-title">
-                            <span className="profile-name">{(member.first_name) ? member.first_name + " " + member.last_name : <Skeleton width={100}/>}</span>
+                            <span className="profile-name">{(member.first_name) ? member.first_name + " " + member.last_name : <Skeleton width={100} />}</span>
                             <div className="profile-tag">{(types[0]) ? memberType[types[0].member_type_id] : ''} - {(member.member_id) ? member.member_id : ''}</div>
                             <div className="profile-divider"></div>
                             <div>

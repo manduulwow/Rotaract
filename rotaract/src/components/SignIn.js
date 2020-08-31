@@ -4,11 +4,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -56,6 +53,10 @@ const SignIn = (props) => {
 
   const userNameOnChange = (event) => { setUsername(event.target.value) }
   const passWordOnChange = (event) => { setPassword(event.target.value) }
+  const onKeyPress = (event) => {
+    if(event.key == 'Enter') 
+      onSubmit();
+  }
 
   const onSubmit = (event) => {
     fetch('api/authenticate ', {
@@ -73,7 +74,6 @@ const SignIn = (props) => {
         throw error
       }
     }).catch(err => {
-      console.log(err)
       alert('Error logging in please try again')
     })
   }
@@ -99,6 +99,7 @@ const SignIn = (props) => {
             autoFocus
             name="username"
             value={username}
+            onKeyPress={onKeyPress}
             onChange={userNameOnChange}
           />
           <TextField
@@ -110,6 +111,7 @@ const SignIn = (props) => {
             label="Password"
             type="password"
             value={password}
+            onKeyPress={onKeyPress}
             onChange={passWordOnChange}
             autoComplete="current-password"
           />

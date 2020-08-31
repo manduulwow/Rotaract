@@ -1,0 +1,2 @@
+2020-07-10T03:55:55.887Z :: Error: Cannot enqueue Query after fatal error. authenticate() 
+2020-07-10T03:56:46.784Z :: Error: Cannot enqueue Query after fatal error. authenticate() 

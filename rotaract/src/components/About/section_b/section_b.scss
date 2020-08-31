@@ -5,7 +5,7 @@
     display: grid;
     grid-template-columns: repeat(16, 1fr);
     font-size: 100%;
-    height: auto;
+    height: 500px;
     align-items: center;
 
     .section_b_left {
@@ -28,6 +28,7 @@
     .section_b_right {
         grid-column: 7/16;
         align-items: center;
+        height: 100%;
     }
 
     @include responsive(tab-land) {

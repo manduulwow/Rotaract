@@ -2,18 +2,16 @@ import React, { useState, useEffect } from 'react';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import DateFnsUtils from '@date-io/date-fns';
 import Button from '@material-ui/core/Button';
 import ImageUploader from 'react-images-upload';
 import Popup from "reactjs-popup";
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import MemberType from './MemberTypeList';
-import { FormControlLabel } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const headers = {
@@ -33,13 +31,22 @@ const useStyles = makeStyles(theme => ({
 
 const MemberEditPage = (props) => {
     const classes = useStyles();
-    const [member, setMember] = useState(props.location.state.member)
-    const [types, setTypes] = useState((props.location.state.types && props.location.state.types.length > 0) ? props.location.state.types : [{ member_id: member.id, member_type_id: 7, started_date: new Date, end_date: new Date }])
+    const [member, setMember] = useState((props.location.state) ? props.location.state.member : {joined_date: new Date})
+    const [types, setTypes] = useState((props.location.state && props.location.state.types && props.location.state.types.length > 0) ? props.location.state.types : [{ member_id: member.id, member_type_id: 7, started_date: new Date, end_date: new Date }])
     const [popUpState, setPopUpState] = useState(false)
     const [imageFileUrl, setImageFileUrl] = useState()
     const [isUploaded, setIsUploaded] = useState(false)
     const [fileName, setFileName] = useState('')
     const [file, setFile] = useState()
+    const [userClubId, setUserClubId] = useState(null);
+    const dispatch = useDispatch()
+
+    fetch('/api/checkToken').then(res => {
+        if (res.status === 200)
+            dispatch({ type: 'SIGNIN' })
+        return res.text()
+    }).then(res => { setUserClubId(res);})
+
     const deleteItem = (index) => {
         if(types.length > 1)
             setTypes(types.filter((el, i) => i != index))
@@ -102,22 +109,22 @@ const MemberEditPage = (props) => {
         }])
     }
     const handleOnClick = () => {
-        console.log(types)
-        axios.post('/api/editMemberData', {
+        let path = (props.location.state) ? '/api/editMemberData' : '/api/addMember'
+        axios.post(path, {
             headers: headers,
             body: {
                 member: member,
                 types: types,
-                fileName: fileName
+                fileName: fileName,
+                userClubId: userClubId
             }
         })
         .then(res => {
-            console.log(res)
             props.history.push({
                 pathname: '/memberProfile',
                 state: { 
-                    memberId: props.location.state.member.id,
-                    club_id: props.location.state.club_id
+                    memberId: (props.location.state) ? props.location.state.member.id : res.data.member_id,
+                    club_id: (props.location.state) ? props.location.state.club_id : res.data.club_id
                 }
             })
         })
@@ -127,7 +134,6 @@ const MemberEditPage = (props) => {
     }
     const handleSubmit = () => {
         setPopUpState(false)
-        const tmp = []
         let reader = new FileReader();
         reader.onloadend = () => {
             setImageFileUrl(reader.result)
@@ -199,7 +205,6 @@ const MemberEditPage = (props) => {
                         />
                         <TextField
                             className="profileInput"
-                            required
                             id="registerNum"
                             name="registerNum"
                             label="Register Number"
