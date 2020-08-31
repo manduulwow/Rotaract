@@ -8,7 +8,8 @@ module.exports = {
             changeOrigin: true,
         },
         contentBase: path.join(__dirname, '/src/index.js'),
-        port: 9000
+        port: 9000,
+        /* host: '192.168.0.21' */
     },
     output: {
         filename: 'build.js',
